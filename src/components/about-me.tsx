@@ -10,10 +10,10 @@ export const AboutMe = () => {
       <div className="flex flex-col gap-8">
         {about.map(({ title, descriptions }, index) => (
           <div key={index}>
-            <h3 className="font-semibold text-xl mb-3 text-[#191f28]">{title}</h3>
+            <h3 className="font-semibold text-xl mb-3 text-[color:var(--color-text)]">{title}</h3>
             <div className="flex flex-col gap-3">
               {descriptions.map((description, descIndex) => (
-                <p key={descIndex} className="text-[#4e5968] leading-relaxed">
+                <p key={descIndex} className="text-[color:var(--color-text-muted)] leading-relaxed">
                   {parseBold(description)}
                 </p>
               ))}

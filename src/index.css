@@ -2,7 +2,20 @@
 
 @theme {
   --color-primary: #000000;
+
+  --color-bg: #f7f8fa;
+  --color-surface: #ffffff;
+  --color-surface-muted: #f2f4f6;
+  --color-border: #e5e8eb;
+
+  --color-text: #191f28;
+  --color-text-muted: #4e5968;
+  --color-text-subtle: #8b95a1;
+
   --color-link: #3182f6;
+  --color-link-hover: #1b64da;
+  --color-accent: #ff6b35;
+  --color-focus: #3182f6;
   
   --font-family-sans: "Pretendard Variable", Pretendard, -apple-system, BlinkMacSystemFont, system-ui, Roboto, "Helvetica Neue", "Segoe UI", "Apple SD Gothic Neo", "Noto Sans KR", "Malgun Gothic", "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", sans-serif;
 }
@@ -15,9 +28,12 @@ body {
   font-family: var(--font-family-sans);
   font-size: 16px;
   font-weight: 400;
-  color: #191f28;
+  color: var(--color-text);
   line-height: 1.6;
-  background-color: #ffffff;
+  background:
+    radial-gradient(1200px 600px at 10% -10%, rgba(49, 130, 246, 0.10), transparent 60%),
+    radial-gradient(1000px 500px at 100% 0%, rgba(255, 107, 53, 0.10), transparent 55%),
+    var(--color-bg);
 }
 
 button {
@@ -26,6 +42,13 @@ button {
   cursor: pointer;
   outline: none;
   padding: 0;
+}
+
+a:focus-visible,
+button:focus-visible {
+  outline: 2px solid var(--color-focus);
+  outline-offset: 3px;
+  border-radius: 10px;
 }
 
 
@@ -39,4 +62,3 @@ div,
 a {
   -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
 }
-

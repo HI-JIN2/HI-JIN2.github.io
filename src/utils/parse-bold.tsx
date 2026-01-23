@@ -5,10 +5,7 @@ const URL_REGEX = /(https?:\/\/[^\s\)]+)/g;
 // 하이라이트 패턴: ==텍스트==
 const HIGHLIGHT_REGEX = /(==.+?==)/g;
 
-// 토스 스타일 컬러
-// 링크: #3182f6 (파란색) - 클릭 가능한 요소
-// 강조: 주황색 계열 - 정보의 중요성을 나타냄
-const HIGHLIGHT_COLOR = "#FF6B35"; // 토스 스타일 주황색 (Accent Orange)
+const HIGHLIGHT_COLOR = "var(--color-accent)";
 
 export const parseBold = (text: string): React.ReactNode[] => {
   // 먼저 URL을 찾아서 링크로 변환

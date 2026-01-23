@@ -17,20 +17,20 @@ export const Profile = () => {
               : value.includes("@")
               ? `mailto:${value}`
               : undefined);
-
-          return (
-            <div key={`${label}-${value}`} className="flex items-center gap-2">
-              <span className="text-[#8b95a1] text-sm font-medium">{label}</span>
-              {resolvedHref ? (
-                <Link href={resolvedHref} className="text-[#3182f6] hover:underline">
-                  {value}
-                </Link>
-              ) : (
-                <span className="text-[#191f28]">{value}</span>
-              )}
-            </div>
-          );
-        })}
+              
+            return (
+              <div key={`${label}-${value}`} className="flex items-center gap-2">
+                <span className="text-[color:var(--color-text-subtle)] text-sm font-medium">{label}</span>
+                {resolvedHref ? (
+                  <Link href={resolvedHref}>
+                    {value}
+                  </Link>
+                ) : (
+                  <span className="text-[color:var(--color-text)]">{value}</span>
+                )}
+              </div>
+            );
+          })}
       </div>
     </Section>
   );

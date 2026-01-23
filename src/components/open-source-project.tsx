@@ -50,7 +50,7 @@ export const OpenSourceProject = ({ title, sectionTitle }: Props = {}) => {
                   left={
                     <>
                       {hasName && (
-                        <h3 className="text-xl font-bold mb-2 text-[#191f28] whitespace-pre-line leading-tight">
+                        <h3 className="text-xl font-bold mb-2 text-[color:var(--color-text)] whitespace-pre-line leading-tight">
                           {project.name}
                         </h3>
                       )}
@@ -61,7 +61,7 @@ export const OpenSourceProject = ({ title, sectionTitle }: Props = {}) => {
                     <div className="flex flex-col gap-10">
                       {project.features.map((feature, featureIndex) => (
                         <div key={`${project.title}-${featureIndex}`}>
-                          <h2 className="text-lg font-bold mb-3 text-[#191f28]">
+                          <h2 className="text-lg font-bold mb-3 text-[color:var(--color-text)]">
                             {feature.title}
                           </h2>
                           <List
@@ -74,7 +74,7 @@ export const OpenSourceProject = ({ title, sectionTitle }: Props = {}) => {
                                   const beforeComma = description.substring(0, commaIndex + 1);
                                   const afterComma = description.substring(commaIndex + 1).trim();
                                   return (
-                                    <p key={index} className="text-[#4e5968]">
+                                    <p key={index} className="text-[color:var(--color-text-muted)]">
                                       {parseBold(beforeComma)}{" "}
                                       <Link href={link} target="_blank" rel="noopener noreferrer">
                                         {parseBold(afterComma)}
@@ -84,14 +84,18 @@ export const OpenSourceProject = ({ title, sectionTitle }: Props = {}) => {
                                 }
                                 // 콤마가 없으면 전체를 링크로
                                 return (
-                                  <p key={index} className="text-[#4e5968]">
+                                  <p key={index} className="text-[color:var(--color-text-muted)]">
                                     <Link href={link} target="_blank" rel="noopener noreferrer">
                                       {parseBold(description)}
                                     </Link>
                                   </p>
                                 );
                               }
-                              return <p key={index} className="text-[#4e5968]">{parseBold(description)}</p>;
+                              return (
+                                <p key={index} className="text-[color:var(--color-text-muted)]">
+                                  {parseBold(description)}
+                                </p>
+                              );
                             })}
                           />
                         </div>
@@ -103,7 +107,7 @@ export const OpenSourceProject = ({ title, sectionTitle }: Props = {}) => {
                 <div className="flex flex-col gap-10">
                   {project.features.map((feature, featureIndex) => (
                     <div key={`${project.title}-${featureIndex}`}>
-                      <h2 className="text-lg font-bold mb-3 text-[#191f28]">
+                      <h2 className="text-lg font-bold mb-3 text-[color:var(--color-text)]">
                         {feature.title}
                       </h2>
                       <List
@@ -116,7 +120,7 @@ export const OpenSourceProject = ({ title, sectionTitle }: Props = {}) => {
                               const beforeComma = description.substring(0, commaIndex + 1);
                               const afterComma = description.substring(commaIndex + 1).trim();
                               return (
-                                <p key={index} className="text-[#4e5968]">
+                                <p key={index} className="text-[color:var(--color-text-muted)]">
                                   {parseBold(beforeComma)}{" "}
                                   <Link href={link} target="_blank" rel="noopener noreferrer">
                                     {parseBold(afterComma)}
@@ -126,14 +130,18 @@ export const OpenSourceProject = ({ title, sectionTitle }: Props = {}) => {
                             }
                             // 콤마가 없으면 전체를 링크로
                             return (
-                              <p key={index} className="text-[#4e5968]">
+                              <p key={index} className="text-[color:var(--color-text-muted)]">
                                 <Link href={link} target="_blank" rel="noopener noreferrer">
                                   {parseBold(description)}
                                 </Link>
                               </p>
                             );
                           }
-                          return <p key={index} className="text-[#4e5968]">{parseBold(description)}</p>;
+                          return (
+                            <p key={index} className="text-[color:var(--color-text-muted)]">
+                              {parseBold(description)}
+                            </p>
+                          );
                         })}
                       />
                     </div>

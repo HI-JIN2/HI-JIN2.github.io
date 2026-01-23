@@ -17,7 +17,7 @@ export const Skills = () => {
           <TwoColumnWrapper
             key={`${title}-${index}`}
             left={
-              <h3 className="text-lg font-bold text-[#191f28]">{title}</h3>
+              <h3 className="text-lg font-bold text-[color:var(--color-text)]">{title}</h3>
             }
             right={<SpecSheet items={items} />}
           />

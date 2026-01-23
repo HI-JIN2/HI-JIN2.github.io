@@ -11,7 +11,7 @@ export const List = ({ items, type = "disc" }: Props) => {
         <li
           key={index}
           style={{ listStyleType: type }}
-          className="relative leading-relaxed break-keep text-[#4e5968]"
+          className="relative leading-relaxed break-keep text-[color:var(--color-text-muted)]"
         >
           {item}
         </li>

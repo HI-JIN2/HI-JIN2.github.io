@@ -5,7 +5,10 @@ export const Link = ({
   className = "",
   ...props
 }: React.AnchorHTMLAttributes<HTMLAnchorElement>) => (
-  <a {...props} className={`text-[#3182f6] hover:underline transition-colors ${className}`}>
+  <a
+    {...props}
+    className={`text-[color:var(--color-link)] hover:text-[color:var(--color-link-hover)] hover:underline transition-colors ${className}`}
+  >
     {children}
   </a>
 );

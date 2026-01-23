@@ -23,7 +23,7 @@ export const ResumeSwitcher = () => {
           focus:outline-none
           active:outline-none
           focus-visible:outline-none
-          ${isAndroid ? "!bg-[#FF6B35] justify-start" : "!bg-[#e5e8eb] justify-end"}
+          ${isAndroid ? "!bg-[color:var(--color-accent)] justify-start" : "!bg-[color:var(--color-border)] justify-end"}
         `}
       >
         <span
@@ -44,7 +44,7 @@ export const ResumeSwitcher = () => {
             android
           </span>
         ) : (
-          <span className="relative z-10 text-[10px] font-medium text-[#8b95a1] ml-6 mr-2 transition-opacity duration-300 ease-in-out">
+          <span className="relative z-10 text-[10px] font-medium text-[color:var(--color-text-subtle)] ml-6 mr-2 transition-opacity duration-300 ease-in-out">
             general
           </span>
         )}

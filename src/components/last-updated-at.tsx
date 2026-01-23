@@ -4,7 +4,7 @@ export const LastUpdatedAt = () => {
   const { lastUpdatedAt } = useResumeData();
 
   return (
-    <div className="text-sm text-center mt-24 text-[#8b95a1]">
+    <div className="text-sm text-center mt-24 text-[color:var(--color-text-subtle)]">
       Last updated: {lastUpdatedAt}
     </div>
   );

@@ -207,8 +207,8 @@ export const TableOfContents = () => {
                 onClick={() => handleClick(id)}
                 className={`text-sm transition-colors text-left w-full ${
                   activeId === id
-                    ? "text-[#191f28] font-semibold"
-                    : "text-[#8b95a1] hover:text-[#4e5968]"
+                    ? "text-[color:var(--color-text)] font-semibold"
+                    : "text-[color:var(--color-text-subtle)] hover:text-[color:var(--color-text-muted)]"
                 }`}
               >
                 {title}
