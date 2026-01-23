@@ -16,7 +16,7 @@ export const ResumeSwitcher = () => {
         aria-label={`Switch to ${isAndroid ? "General" : "Android"} resume`}
         aria-pressed={isAndroid}
         className={`
-          relative inline-flex h-8 w-18 items-center px-2
+          relative inline-flex h-8 w-[72px] items-center px-2
           rounded-full
           transition-all duration-300 ease-in-out
           outline-none

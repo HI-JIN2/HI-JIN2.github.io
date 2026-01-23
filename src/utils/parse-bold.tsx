@@ -14,7 +14,10 @@ export const parseBold = (text: string): React.ReactNode[] => {
   // 먼저 URL을 찾아서 링크로 변환
   const urlParts: Array<{ type: "text" | "url"; content: string; url?: string }> = [];
   let lastIndex = 0;
-  let match;
+  let match: RegExpExecArray | null;
+
+  // NOTE: URL_REGEX is global (/g). Reset to avoid lastIndex leaking across calls.
+  URL_REGEX.lastIndex = 0;
 
   while ((match = URL_REGEX.exec(text)) !== null) {
     if (match.index > lastIndex) {

@@ -1,4 +1,4 @@
-import { useEffect, useMemo, useState } from "react";
+import { useEffect, useMemo, useRef, useState } from "react";
 import { useResumeData } from "../context/resume-context";
 
 type Section = {
@@ -10,6 +10,14 @@ export const TableOfContents = () => {
   const { skills } = useResumeData();
   const [activeId, setActiveId] = useState<string>("");
   const [isScrolling, setIsScrolling] = useState(false);
+  const timeoutIdsRef = useRef<number[]>([]);
+
+  useEffect(() => {
+    return () => {
+      timeoutIdsRef.current.forEach((id) => window.clearTimeout(id));
+      timeoutIdsRef.current = [];
+    };
+  }, []);
   const sections = useMemo<Section[]>(() => {
     return [
       { id: "about", title: "About" },
@@ -143,12 +151,7 @@ export const TableOfContents = () => {
 
     return () => {
       window.removeEventListener("scroll", handleScroll);
-      sections.forEach(({ id }) => {
-        const element = document.getElementById(id);
-        if (element) {
-          observer.unobserve(element);
-        }
-      });
+      observer.disconnect();
     };
   }, [isScrolling, sections]);
 
@@ -167,7 +170,7 @@ export const TableOfContents = () => {
       window.scrollTo({ top: Math.max(0, y), behavior: "smooth" });
       
       // 스크롤 완료 후 다시 확인
-      setTimeout(() => {
+      timeoutIdsRef.current.push(window.setTimeout(() => {
         const finalElement = document.getElementById(id);
         if (finalElement) {
           const finalY = finalElement.getBoundingClientRect().top + window.pageYOffset + yOffset;
@@ -177,7 +180,7 @@ export const TableOfContents = () => {
         setActiveId(id);
         
         // 스크롤 완료 후 약간의 지연을 두고 감지 재개
-        setTimeout(() => {
+        timeoutIdsRef.current.push(window.setTimeout(() => {
           // 마지막 확인: 여전히 클릭한 섹션이 활성화되어 있어야 함
           const checkElement = document.getElementById(id);
           if (checkElement) {
@@ -189,8 +192,8 @@ export const TableOfContents = () => {
             }
           }
           setIsScrolling(false);
-        }, 800);
-      }, 300);
+        }, 800));
+      }, 300));
     }
   };
 

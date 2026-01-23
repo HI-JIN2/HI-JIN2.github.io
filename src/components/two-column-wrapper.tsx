@@ -8,7 +8,7 @@ type Props = {
 export const TwoColumnWrapper = ({ left, right }: Props) => {
   return (
     <div className="flex max-sm:flex-col gap-8">
-      <div className="flex-shrink-0 max-sm:w-full" style={{ minWidth: "240px", width: "240px" }}>
+      <div className="flex-shrink-0 w-[240px] min-w-[240px] max-sm:w-full max-sm:min-w-0">
         {left}
       </div>
       <div className="flex-1 min-w-0">{right}</div>
