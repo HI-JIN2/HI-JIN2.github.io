@@ -8,11 +8,10 @@ import { useResumeData } from "../context/resume-context";
 import { formatDateRange } from "../utils/calculate-duration";
 import { parseBold } from "../utils/parse-bold";
 
-const renderTaskItems = (tasks: string[]) => {
-  return tasks.map((task, index) => (
-    <React.Fragment key={index}>{parseBold(task)}</React.Fragment>
+const renderParsedItems = (items: string[]): React.ReactNode[] =>
+  items.map((item, index) => (
+    <React.Fragment key={index}>{parseBold(item)}</React.Fragment>
   ));
-};
 
 export const WorkExperience = () => {
   const { experience } = useResumeData();
@@ -76,7 +75,7 @@ export const WorkExperience = () => {
                           <div className="mb-6">
                             <h3 className="text-sm font-semibold mb-3 text-[color:var(--color-text)]">성과</h3>
                             <List
-                              items={renderTaskItems(feature.achievements)}
+                              items={renderParsedItems(feature.achievements)}
                             />
                           </div>
                         )}
@@ -84,7 +83,7 @@ export const WorkExperience = () => {
                           <div className="mb-6">
                             <h3 className="text-sm font-semibold mb-3 text-[color:var(--color-text)]">주요 기여</h3>
                             <List
-                              items={renderTaskItems(feature.contributions)}
+                              items={renderParsedItems(feature.contributions)}
                             />
                           </div>
                         )}

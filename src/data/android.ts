@@ -2,7 +2,8 @@ import type { ResumeVariant } from "./index";
 
 export const ANDROID_RESUME: ResumeVariant = {
   profile: {
-    name: "나무보다 숲을 바라보는 안드로이드 개발자, 유진",
+    name: "유진",
+    headline: "나무보다 숲을 바라보는 안드로이드 개발자",
     links: [
       {
         label: "Email",
@@ -15,10 +16,10 @@ export const ANDROID_RESUME: ResumeVariant = {
   },
   about: [
     {
-      title: "서비스를 끝까지 책임지는 개발자입니다.",
+      title: "서비스를 운영하며 개선해온 개발자입니다.",
       descriptions: [
         "하나의 기능이 아닌, 프로덕트 단위로 개발하고 운영한 경험이 있습니다.",
-        "학식 리뷰 앱 ==EAT-SSU==를 ==2년==간 운영하며 사용자 ==4,000명== 규모 서비스의 품질을 책임졌습니다.",
+        "학식 리뷰 앱 ==EAT-SSU==를 ==2년==간 운영하며 사용자 ==4,000명== 규모 서비스의 품질을 개선했습니다.",
         "사용자 CS · 피드백 반영, UI/UX 개선, ==XML→Compose== 전환, 플레이스토어 정책 대응 등 '운영–개선–업데이트' 전체 사이클을 반복하며 성능 및 안정성을 개선했습니다.",
         "그 결과, 전년 대비 ==WAU/MAU==가 ==21.8% → 62.4%==로 상승하여 주간 재방문율과 서비스 Stickiness를 크게 개선했습니다.",
       ],
@@ -32,9 +33,47 @@ export const ANDROID_RESUME: ResumeVariant = {
     {
       title: "함께 성장하는 문화를 만들어온 개발자입니다.",
       descriptions: [
-        "전공 프로젝트로 시작한 ==EAT-SSU== 팀을 ==3명==에서 ==15명== 규모로 확장하는 과정에서, 지원자–팀 커피챗을 운영해 지원자와 팀의 니즈를 사전에 파악하는 절차를 만들었습니다.",
+        "전공 프로젝트로 시작한 ==EAT-SSU== 팀을 ==3명==에서 ==27명== 규모로 확장하는 과정에서, 지원자–팀 커피챗을 운영해 지원자와 팀의 니즈를 사전에 파악하는 절차를 만들었습니다.",
         "==EAT-SSU== 팀 내 세미나, ==KPT== 회고, 안드로이드 팀 코드리뷰 및 컨벤션 등을 통해 팀 문화를 정착시켰습니다.",
         "구글 학생 개발자 커뮤니티에서 ==2년==간 활동하며, ==CS 인터뷰== 스터디·회고 모임·테크블로그 모임 등을 운영해 '스터디를 가장 많이 운영한 멤버'로 선정되었습니다.",
+      ],
+    },
+  ],
+  skills: [
+    {
+      title: "Android",
+      items: [
+        "Kotlin",
+        "Jetpack Compose",
+        "XML",
+        "Coroutine / Flow",
+        "Hilt",
+        "Retrofit",
+        "Room",
+        "WorkManager",
+        "Firebase",
+      ],
+    },
+    {
+      title: "Architecture & Quality",
+      items: [
+        "Clean Architecture",
+        "MVVM",
+        "Multi-Module",
+        "UiState / UiEvent",
+        "JUnit",
+        "Crashlytics",
+      ],
+    },
+    {
+      title: "Delivery & Collaboration",
+      items: [
+        "Git",
+        "GitHub",
+        "GitHub Actions",
+        "Fastlane",
+        "Notion",
+        "Figma",
       ],
     },
   ],
@@ -275,4 +314,3 @@ export const ANDROID_RESUME: ResumeVariant = {
     },
   ],
 };
-

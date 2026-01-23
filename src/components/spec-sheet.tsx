@@ -7,7 +7,7 @@ export const SpecSheet = ({ items }: Props) => {
       {items.map((item) => (
         <span
           key={item}
-          className="px-2.5 py-1 bg-[color:var(--color-surface-muted)] rounded-md text-sm text-[color:var(--color-text-muted)]"
+          className="px-2.5 py-1 bg-[color:var(--color-surface-muted)] rounded-[var(--ui-radius-control)] text-sm text-[color:var(--color-text-muted)] border border-[color:var(--color-border)]"
         >
           {item}
         </span>

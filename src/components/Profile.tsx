@@ -8,6 +8,11 @@ export const Profile = () => {
 
   return (
     <Section title={profile.name} mb={64}>
+      {profile.headline && (
+        <p className="text-[color:var(--color-text-muted)] text-base leading-relaxed -mt-4 mb-6">
+          {profile.headline}
+        </p>
+      )}
       <div className="flex flex-wrap gap-x-6 gap-y-2">
         {items.map(({ label, value, href }) => {
           const resolvedHref =

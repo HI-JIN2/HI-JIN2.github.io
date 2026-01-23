@@ -2,7 +2,8 @@ import type { ResumeVariant } from "./index";
 
 export const GENERAL_RESUME: ResumeVariant = {
   profile: {
-    name: "나무보다 숲을 바라보는 소프트웨어 개발자, 유진",
+    name: "유진",
+    headline: "나무보다 숲을 보는 주니어 개발자 — 제품 단위로 만들고 운영하며 개선",
     links: [
       {
         label: "Email",
@@ -15,81 +16,70 @@ export const GENERAL_RESUME: ResumeVariant = {
   },
   about: [
     {
-      title: "서비스를 끝까지 책임지는 개발자입니다.",
+      title: "제품을 운영하며 개선해온 개발자입니다.",
       descriptions: [
-        "하나의 기능이 아닌, 프로덕트 단위로 개발하고 운영한 경험이 있습니다.",
-        "학식 리뷰 앱 ==EAT-SSU==를 ==2년==간 운영하며 사용자 ==4,000명== 규모 서비스의 품질을 책임졌습니다.",
-        "사용자 CS · 피드백 반영, UI/UX 개선 등 '운영–개선–업데이트' 전체 사이클을 반복하며 성능 및 안정성을 개선했습니다.",
-        "그 결과, 전년 대비 ==WAU/MAU==가 ==21.8% → 62.4%==로 개선하며 주간 재방문율과 서비스 Stickiness를 크게 향상시켰습니다.",
+        "기능 단위가 아니라 프로덕트 단위로 개발하고 운영한 경험이 있습니다.",
+        "EAT-SSU를 2년간 운영하며 사용자 4,000명 규모 서비스의 품질을 개선했습니다.",
+        "CS·피드백 반영, UI/UX 개선, 성능/안정성 개선, 배포/정책 대응까지 운영 사이클을 반복했습니다.",
+        "그 결과 WAU/MAU가 21.8% → 62.4%로 개선되며 재방문율을 끌어올렸습니다.",
       ],
     },
     {
-      title: "기술로 실질적인 문제를 빠르게 해결하는 개발자입니다.",
+      title: "운영 환경을 고려해 안정적인 구조를 고민합니다.",
       descriptions: [
-        "해외 봉사 현장에서 500권의 도서를 단기간에 전산화해야 하는 상황에서, 4시간 만에 자동화 시스템을 설계·구현했습니다.",
-        "반복 작업을 제거하는 구조를 설계해 수작업 대비 6배 이상의 처리 효율을 달성했습니다."
+        "배포 후 발생할 수 있는 실패/재시도/중복 실행을 고려해 책임 분리와 작업 단위 분리를 우선으로 설계합니다.",
+        "예를 들어 마니또 배정/메일 발송 서비스를 API → 배정 로직 → 발송 작업으로 나눠 중복 실행 상황을 줄이도록 구성했습니다.",
       ],
     },
     {
-      title: "함께 성장하는 문화를 만들어온 개발자입니다.",
+      title: "협업을 위한 기준(문서/리뷰/컨벤션)을 정리합니다.",
       descriptions: [
-        "전공 프로젝트로 시작한 ==EAT-SSU== 팀을 ==3명==에서 ==15명== 규모로 확장하는 과정에서, 지원자–팀 커피챗을 운영해 지원자와 팀의 니즈를 사전에 파악하는 절차를 만들었습니다.",
-        "==EAT-SSU== 팀 내 세미나, ==KPT== 회고, 코드리뷰 및 컨벤션 등을 통해 팀 문화를 정착시켰습니다.",
-        "구글 학생 개발자 커뮤니티에서 ==2년==간 활동하며, ==CS 인터뷰== 스터디·회고 모임·테크블로그 모임 등을 운영해 '스터디를 가장 많이 운영한 멤버'로 선정되었습니다.",
+        "EAT-SSU 팀을 3명 → 27명 규모로 확장하며 커피챗/세미나/KPT 회고/코드리뷰/컨벤션으로 협업 기준을 정착시켰습니다.",
+        "커뮤니티에서 2년간 CS 인터뷰·회고·테크블로그 스터디를 운영하며 함께 성장하는 문화를 만들었습니다.",
       ],
     },
   ],
   skills: [
     {
-      title: "Languages",
-      items: ["Kotlin", "Python", "Java"],
-    },
-    {
-      title: "Frameworks",
+      title: "Working Style",
       items: [
-        "Android",
-        "Spring Boot",
+        "요구사항 정리 / 우선순위",
+        "MVP → 운영 → 개선",
+        "피드백/지표 기반 개선",
+        "코드리뷰 / 컨벤션",
       ],
     },
     {
-      title: "Architecture",
+      title: "Android",
       items: [
-        "Clean Architecture",
-        "Multi-Module",
-        "MVVM",
+        "Kotlin",
+        "Jetpack Compose",
+        "Coroutine / Flow",
+        "Hilt",
+        "Room",
+        "Firebase",
       ],
     },
     {
-      title: "Asynchronous",
-      items: [
-        "Coroutine",
-        "Flow",
-      ],
+      title: "Backend",
+      items: ["Kotlin", "Spring Boot", "JPA", "REST API 설계", "JavaMailSender"],
     },
     {
-      title: "Infrastructure & Databases",
+      title: "Infra & Data",
       items: [
         "AWS",
-        "NCP",
         "Docker",
+        "Docker Compose",
+        "Linux",
         "PostgreSQL",
         "MySQL",
-        "Room",
-        "Linux",
         "Firebase",
-        "Redash",
+        "Flyway",
       ],
     },
     {
-      title: "Tools",
-      items: [
-        "Git",
-        "GitHub",
-        "GitHub Actions",
-        "Fastlane",
-        "Notion",
-        "Figma",
-      ],
+      title: "Tooling",
+      items: ["Git", "GitHub", "GitHub Actions", "Fastlane", "Notion", "Figma"],
     },
   ],
   experience: [
@@ -269,15 +259,14 @@ export const GENERAL_RESUME: ResumeVariant = {
         {
           title: "마니또 배정 및 이메일 전송 자동화 서비스",
           spec: [
-            "Kotlin2",
-            "SpringBoot3",
+            "Kotlin",
+            "Spring Boot",
             "JPA",
             "JavaMailSender",
             "PostgreSQL",
             "Docker",
             "Docker Compose",
             "Flyway",
-            "Next.js",
           ],
           achievements: [
             "1인 풀스텍 설계 · 개발 · 운영",

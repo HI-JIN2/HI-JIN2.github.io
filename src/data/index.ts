@@ -1,3 +1,6 @@
+import { ANDROID_RESUME } from "./android";
+import { GENERAL_RESUME } from "./general";
+
 type ProfileLink = {
   label: string;
   value: string;
@@ -6,6 +9,7 @@ type ProfileLink = {
 
 export type Profile = {
   name: string;
+  headline?: string;
   links: ProfileLink[];
 };
 
@@ -178,13 +182,13 @@ const COMMON_SIMPLE_LISTS: SimpleListDataType[] = [
         title: "",
         descriptions: [
           "GDGoC SSUMALL SEMINAR, ICT 인턴십제도와 스타트업 인턴 후기 (2024.12)",
-          "GDGoC SSUMALL SEMINAR, 해외봉사가서 개발한 썰 푼다: 제한된 환경에서 문제를 빠르게 해결한 개발 경험 공유 (2024.09)",
+          "GDGoC SSUMALL SEMINAR, 해외봉사가서 개발하기 (4시간 만에 만든 미니 도서관 전산 시스템) (2024.09)",
           "GDSC SSUMALL SEMINAR, 학교에서 서비스 운영하기 (2024.08)",
           "UMC 4th Conference, JWT로 알아보는 안드로이드-서버가 소통하는 법 (2023.06)"
         ],
         links: [
           "",
-          "",
+          "https://www.youtube.com/watch?v=BcnWM_nqKow",
           "https://www.youtube.com/watch?v=Qx719VFI6No",
           "",
         ],
@@ -234,9 +238,6 @@ const COMMON_SIMPLE_LISTS: SimpleListDataType[] = [
     ],
   },
 ];
-
-import { ANDROID_RESUME } from "./android";
-import { GENERAL_RESUME } from "./general";
 
 export const RESUME_VARIANTS: Record<ResumeType, ResumeVariant> = {
   android: ANDROID_RESUME,

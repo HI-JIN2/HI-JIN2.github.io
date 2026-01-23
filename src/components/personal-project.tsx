@@ -1,7 +1,7 @@
 import { useResumeData } from "../context/resume-context";
-import { parseBold } from "../utils/parse-bold";
 import { LinkList } from "./link-list";
 import { List } from "./List";
+import { RichTextLine } from "./rich-text-line";
 import { Section } from "./Section";
 import { SpecSheet } from "./spec-sheet";
 import { TwoColumnWrapper } from "./two-column-wrapper";
@@ -42,7 +42,7 @@ export const PersonalProject = () => {
                         <List
                           items={feature.achievements.map(
                             (description: string, index: number) => (
-                              <p key={index} className="text-[color:var(--color-text-muted)]">{parseBold(description)}</p>
+                              <RichTextLine key={index} text={description} />
                             )
                           )}
                         />
@@ -56,7 +56,7 @@ export const PersonalProject = () => {
                         <List
                           items={feature.contributions.map(
                             (description: string, index: number) => (
-                              <p key={index} className="text-[color:var(--color-text-muted)]">{parseBold(description)}</p>
+                              <RichTextLine key={index} text={description} />
                             )
                           )}
                         />

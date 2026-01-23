@@ -1,21 +1,49 @@
 @import "tailwindcss";
 
 @theme {
-  --color-primary: #000000;
+  --background: #fbf5ea;
+  --foreground: #221a12;
 
-  --color-bg: #f7f8fa;
-  --color-surface: #ffffff;
-  --color-surface-muted: #f2f4f6;
-  --color-border: #e5e8eb;
+  --ui-card: rgba(255, 255, 255, 0.92);
+  --ui-card-solid: #ffffff;
+  --ui-border: rgba(61, 37, 15, 0.12);
+  --ui-muted: #6b5d4f;
+  --ui-muted-2: rgba(107, 93, 79, 0.70);
+  --ui-primary: #2f6b57;
+  --ui-primary-ink: #fffaf2;
+  --ui-accent: #b45309;
 
-  --color-text: #191f28;
-  --color-text-muted: #4e5968;
-  --color-text-subtle: #8b95a1;
+  --ui-radius-card: 24px;
+  --ui-radius-control: 16px;
+  --ui-radius-pill: 999px;
 
-  --color-link: #3182f6;
-  --color-link-hover: #1b64da;
-  --color-accent: #ff6b35;
-  --color-focus: #3182f6;
+  --ui-space-input-y: 12px;
+  --ui-space-input-x: 14px;
+
+  --ui-secondary-bg: var(--background);
+  --ui-secondary-hover-bg: var(--ui-card-solid);
+  --ui-secondary-border: var(--ui-border);
+  --ui-secondary-text: var(--foreground);
+  --ui-shadow: 0 10px 24px rgba(87, 63, 36, 0.10);
+  --ui-shadow-hover: 0 14px 32px rgba(87, 63, 36, 0.14);
+
+  /* Backward-compatible tokens used in components */
+  --color-primary: var(--ui-primary);
+
+  --color-bg: var(--background);
+  --color-surface: var(--ui-card);
+  --color-surface-muted: color-mix(in srgb, var(--ui-card-solid) 82%, transparent);
+  --color-border: var(--ui-border);
+
+  --color-text: var(--foreground);
+  --color-text-muted: var(--ui-muted);
+  --color-text-subtle: var(--ui-muted-2);
+
+  --color-link: var(--ui-primary);
+  --color-link-hover: color-mix(in srgb, var(--ui-primary) 82%, #000);
+  --color-accent: var(--ui-accent);
+  --color-accent-soft: color-mix(in srgb, var(--ui-accent) 16%, transparent);
+  --color-focus: var(--ui-primary);
   
   --font-family-sans: "Pretendard Variable", Pretendard, -apple-system, BlinkMacSystemFont, system-ui, Roboto, "Helvetica Neue", "Segoe UI", "Apple SD Gothic Neo", "Noto Sans KR", "Malgun Gothic", "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", sans-serif;
 }
@@ -31,9 +59,22 @@ body {
   color: var(--color-text);
   line-height: 1.6;
   background:
-    radial-gradient(1200px 600px at 10% -10%, rgba(49, 130, 246, 0.10), transparent 60%),
-    radial-gradient(1000px 500px at 100% 0%, rgba(255, 107, 53, 0.10), transparent 55%),
+    radial-gradient(900px 520px at 12% -10%, color-mix(in srgb, var(--ui-primary) 14%, transparent), transparent 62%),
+    radial-gradient(900px 520px at 100% 0%, color-mix(in srgb, var(--ui-accent) 12%, transparent), transparent 58%),
     var(--color-bg);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+@keyframes fadeUp {
+  from {
+    opacity: 0;
+    transform: translate3d(0, 10px, 0);
+  }
+  to {
+    opacity: 1;
+    transform: translate3d(0, 0, 0);
+  }
 }
 
 button {
@@ -48,7 +89,7 @@ a:focus-visible,
 button:focus-visible {
   outline: 2px solid var(--color-focus);
   outline-offset: 3px;
-  border-radius: 10px;
+  border-radius: var(--ui-radius-control);
 }
 
 

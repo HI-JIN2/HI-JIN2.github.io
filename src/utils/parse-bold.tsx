@@ -66,7 +66,11 @@ export const parseBold = (text: string): React.ReactNode[] => {
             // 하이라이트 텍스트
             const highlightContent = highlightSegment.slice(2, -2);
             processed.push(
-              <span key={keyIndex++} style={{ color: HIGHLIGHT_COLOR, fontWeight: 600 }}>
+              <span
+                key={keyIndex++}
+                className="font-semibold"
+                style={{ color: HIGHLIGHT_COLOR }}
+              >
                 {highlightContent}
               </span>
             );
@@ -75,12 +79,12 @@ export const parseBold = (text: string): React.ReactNode[] => {
             const boldSplit = highlightSegment.split(/(\*\*.+?\*\*)/g);
             
             boldSplit.forEach((segment) => {
-              if (segment.startsWith("**") && segment.endsWith("**")) {
-                processed.push(
-                  <strong className="font-medium bg-gray-300/30" key={keyIndex++}>
-                    {segment.slice(2, -2)}
-                  </strong>
-                );
+                if (segment.startsWith("**") && segment.endsWith("**")) {
+                  processed.push(
+                    <strong className="font-semibold" key={keyIndex++}>
+                      {segment.slice(2, -2)}
+                    </strong>
+                  );
               } else if (segment) {
                 processed.push(<React.Fragment key={keyIndex++}>{segment}</React.Fragment>);
               }

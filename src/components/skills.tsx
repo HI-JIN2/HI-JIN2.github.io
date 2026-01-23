@@ -1,7 +1,6 @@
 import { useResumeData } from "../context/resume-context";
 import { Section } from "./Section";
 import { SpecSheet } from "./spec-sheet";
-import { TwoColumnWrapper } from "./two-column-wrapper";
 
 export const Skills = () => {
   const { skills } = useResumeData();
@@ -12,15 +11,17 @@ export const Skills = () => {
 
   return (
     <Section title="Skills" id="skills" mt={80}>
-      <div className="flex flex-col gap-10">
+      <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
         {skills.map(({ title, items }, index) => (
-          <TwoColumnWrapper
+          <div
             key={`${title}-${index}`}
-            left={
-              <h3 className="text-lg font-bold text-[color:var(--color-text)]">{title}</h3>
-            }
-            right={<SpecSheet items={items} />}
-          />
+            className="rounded-2xl border border-[color:var(--color-border)] bg-[color:var(--color-surface)] px-5 py-5"
+          >
+            <h3 className="text-lg font-bold text-[color:var(--color-text)] mb-3">
+              {title}
+            </h3>
+            <SpecSheet items={items} />
+          </div>
         ))}
       </div>
     </Section>
