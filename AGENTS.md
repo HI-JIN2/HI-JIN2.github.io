@@ -5,13 +5,13 @@ This repository is a Vite + React + TypeScript resume site deployed to GitHub Pa
 ## Scope + Intent
 
 - Primary stack: React 18, TypeScript (strict), Vite, Tailwind CSS v4.
-- Deployment: GitHub Pages; app is served under the subpath `/resume`.
+- Deployment: GitHub Pages; app is served at the domain root `/`.
 - No dedicated lint/test tooling is currently configured (type-check is enforced via `tsc`).
 
 ## Key Paths
 
 - App entry: `src/index.tsx`
-- Router root: `src/App.tsx` (BrowserRouter `basename="/resume"`)
+- Router root: `src/App.tsx`
 - Data model + content: `src/data/*`
 - Shared state: `src/context/resume-context.tsx`
 - Styling: `src/index.css` (Tailwind v4 `@import "tailwindcss";` + `@theme` tokens)
@@ -133,7 +133,7 @@ npx vitest run -t "some test name"
 
 ## App-Specific Constraints
 
-- Do not change `basename="/resume"` in `src/App.tsx` or `base: "/resume"` in `vite.config.ts` unless you also update GitHub Pages deployment.
+- If you change `base` in `vite.config.ts`, ensure it matches the GitHub Pages publishing path.
 - Query parameter convention: `?General=true` selects “general”; absence defaults to “android” (`DEFAULT_RESUME_TYPE`).
 
 ## Cursor / Copilot Rules

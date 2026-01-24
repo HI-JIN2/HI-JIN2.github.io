@@ -56,7 +56,7 @@ function ResumeContent() {
 
 function App() {
   return (
-    <BrowserRouter basename="/resume">
+    <BrowserRouter>
       <Routes>
         <Route
           path="/*"

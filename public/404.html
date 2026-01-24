@@ -9,31 +9,19 @@
       var path = window.location.pathname;
       var search = window.location.search;
       var hash = window.location.hash;
-      
-      // /resume/general -> /resume?General=true로 변환
-      var segments = path.split('/').filter(Boolean);
-      var resumeIndex = segments.indexOf('resume');
-      
-      var redirectPath = '/resume/index.html';
-      
-      if (resumeIndex !== -1 && segments.length > resumeIndex + 1) {
-        // /resume/general -> General=true 쿼리 파라미터로 변환
-        var route = segments.slice(resumeIndex + 1).join('/');
-        if (route === 'general') {
-          var params = new URLSearchParams(search);
-          params.set('General', 'true');
-          redirectPath += '?' + params.toString();
-        } else {
-          // 다른 경로는 기존 쿼리 파라미터 유지
-          if (search) {
-            redirectPath += search;
-          }
-        }
-      } else {
-        // 기본 경로는 기존 쿼리 파라미터 유지
-        if (search) {
-          redirectPath += search;
-        }
+
+      // /general -> /?General=true로 변환
+      // (그 외 경로는 쿼리 파라미터만 유지하고 index.html로 리다이렉트)
+      var normalizedPath = path.replace(/^\/+/, "").replace(/\/+$/, "");
+
+      var redirectPath = "/index.html";
+
+      if (normalizedPath === "general") {
+        var params = new URLSearchParams(search);
+        params.set("General", "true");
+        redirectPath += "?" + params.toString();
+      } else if (search) {
+        redirectPath += search;
       }
       
       if (hash) {
@@ -42,7 +30,7 @@
       
       window.location.replace(redirectPath);
     </script>
-    <meta http-equiv="refresh" content="1; url=/resume/index.html">
+    <meta http-equiv="refresh" content="1; url=/index.html">
   </head>
   <body>
     <p>Redirecting...</p>
