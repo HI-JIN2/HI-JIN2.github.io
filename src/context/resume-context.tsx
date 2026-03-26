@@ -16,14 +16,16 @@ import {
 type ResumeContextValue = {
   type: ResumeType;
   data: ResumeContent;
+  theme: "light" | "dark";
   setType: (type: ResumeType) => void;
+  toggleTheme: () => void;
 };
 
 const ResumeContext = createContext<ResumeContextValue | null>(null);
 
 const resolveInitialType = (pathname: string): ResumeType => {
   // 경로에서 타입 확인
-  if (pathname === "/sw-engineer" || pathname === "/general") {
+  if (pathname === "/sw" || pathname === "/general") {
     return "general";
   }
   // 기본값은 android
@@ -49,12 +51,30 @@ export const ResumeProvider = ({ children }: { children: React.ReactNode }) => {
   // 타입 변경 시 경로 업데이트
   const handleSetType = (newType: ResumeType) => {
     setType(newType);
-    const targetPath = newType === "general" ? "/sw-engineer" : "/android";
+    const targetPath = newType === "general" ? "/sw" : "/android";
     navigate(targetPath, { replace: true });
   };
 
+  const [theme, setTheme] = useState<"light" | "dark">(() => {
+    if (typeof window !== "undefined") {
+      const saved = localStorage.getItem("theme") as "light" | "dark";
+      if (saved) return saved;
+      return window.matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light";
+    }
+    return "light";
+  });
+
+  useEffect(() => {
+    document.documentElement.classList.toggle("dark", theme === "dark");
+    localStorage.setItem("theme", theme);
+  }, [theme]);
+
+  const toggleTheme = () => {
+    setTheme(prev => prev === "light" ? "dark" : "light");
+  };
+
   return (
-    <ResumeContext.Provider value={{ type, data, setType: handleSetType }}>
+    <ResumeContext.Provider value={{ type, data, theme, setType: handleSetType, toggleTheme }}>
       {children}
     </ResumeContext.Provider>
   );

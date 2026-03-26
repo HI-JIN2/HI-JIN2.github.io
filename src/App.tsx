@@ -23,8 +23,14 @@ function RedirectHandler() {
       return;
     }
     
+    // /sw-engineer를 /sw로 리다이렉트
+    if (location.pathname === '/sw-engineer') {
+      navigate({ pathname: '/sw', search: location.search, hash: location.hash }, { replace: true });
+      return;
+    }
+    
     // 허용된 경로가 아니면 /android로 리다이렉트
-    const allowedPaths = ['/android', '/sw-engineer', '/general'];
+    const allowedPaths = ['/android', '/sw', '/general'];
     if (!allowedPaths.includes(location.pathname)) {
       navigate({ pathname: '/android', search: location.search, hash: location.hash }, { replace: true });
     }

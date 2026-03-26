@@ -1,50 +1,34 @@
 import { useResume } from "../context/resume-context";
 
 export const ResumeSwitcher = () => {
-  const { type, setType } = useResume();
+  const { type, setType, theme, toggleTheme } = useResume();
   const isAndroid = type === "android";
 
-  const toggleType = () => {
-    setType(isAndroid ? "general" : "android");
-  };
-
   return (
-    <button
-      type="button"
-      onClick={toggleType}
-      aria-label={`Switch to ${isAndroid ? "General" : "Android"} resume`}
-      aria-pressed={isAndroid}
-      className={`
-        relative inline-flex h-8 w-[72px] items-center px-2
-        rounded-[var(--ui-radius-pill)]
-        transition-all duration-300 ease-in-out
-        border border-[color:var(--ui-border)]
-        shadow-[var(--ui-shadow)]
-        ${isAndroid ? "!bg-[color:var(--color-accent)] justify-start" : "!bg-[color:var(--ui-card-solid)] justify-end"}
-      `}
-    >
-      <span
-        className={`
-          absolute h-6 w-6
-          rounded-[var(--ui-radius-pill)]
-          !bg-[color:var(--ui-primary-ink)]
-          shadow-[0_8px_18px_rgba(87,63,36,0.18)]
-          transition-all duration-300 ease-in-out
-          transform
-          ${isAndroid ? "right-1 translate-x-0" : "left-1 translate-x-0"}
-          hover:scale-110
-          active:scale-95
-        `}
-      />
-      {isAndroid ? (
-        <span className="relative z-10 text-[10px] font-medium text-white/80 ml-2 mr-6 transition-opacity duration-300 ease-in-out">
-          android
-        </span>
-      ) : (
-        <span className="relative z-10 text-[10px] font-medium text-[color:var(--color-text-subtle)] ml-6 mr-2 transition-opacity duration-300 ease-in-out">
-          general
-        </span>
-      )}
-    </button>
+    <nav className="flex items-center gap-6 text-sm">
+      <div className="flex items-center gap-4">
+        <button
+          onClick={() => setType("android")}
+          className={`font-medium ${isAndroid ? "text-[color:var(--color-text)] underline underline-offset-4" : "text-[color:var(--color-text-muted)] hover:text-[color:var(--color-text)]"}`}
+        >
+          Android
+        </button>
+        <span className="text-[color:var(--color-border)]">/</span>
+        <button
+          onClick={() => setType("general")}
+          className={`font-medium ${!isAndroid ? "text-[color:var(--color-text)] underline underline-offset-4" : "text-[color:var(--color-text-muted)] hover:text-[color:var(--color-text)]"}`}
+        >
+          SW Engineer
+        </button>
+      </div>
+      
+      <button
+        onClick={toggleTheme}
+        className="p-1 px-2 border border-[color:var(--color-border)] rounded hover:bg-[color:var(--ui-secondary-hover-bg)] text-[color:var(--color-text)] transition-colors"
+        aria-label="Toggle theme"
+      >
+        {theme === "light" ? "🌙 Dark" : "☀️ Light"}
+      </button>
+    </nav>
   );
 };
