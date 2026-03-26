@@ -13,7 +13,8 @@ export const AboutMe = () => {
   const { about } = useResumeData();
   return (
     <Section title="About" id="about">
-      <div style={{ display: "flex", flexDirection: "column", gap: "1.5rem" }}>
+      {/* 1-Column Layout for Bio/About */}
+      <div style={{ display: "flex", flexDirection: "column", gap: "1.5rem", maxWidth: "100%" }}>
         {about.map(({ title, descriptions }, index) => (
           <div key={index}>
             <h3 style={{ fontWeight: 600, fontSize: "1rem", marginBottom: "0.5rem", color: "var(--color-text)" }}>
