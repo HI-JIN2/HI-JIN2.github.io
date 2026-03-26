@@ -145,19 +145,19 @@ a:hover {
   text-decoration: underline;
 }
 
+/* Global Typography & Spacing */
+li, p, span, div {
+  line-height: 1.6 !important;
+}
+
 ul, ol {
   margin-top: 0.5rem;
   margin-bottom: 0.5rem;
+  padding-left: 1.25rem;
 }
 
 li {
   margin-bottom: 0.5rem;
-  line-height: 1.6;
-}
-
-/* Ensure consistent line height for all resume text */
-p, li, span, div {
-  line-height: 1.6;
 }
 
 li::marker {

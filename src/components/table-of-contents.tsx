@@ -11,11 +11,15 @@ export const TableOfContents = () => {
   const { skills } = data;
   const [activeId, setActiveId] = useState<string>("");
   const [isScrolling, setIsScrolling] = useState(false);
+  const [isDesktop, setIsDesktop] = useState(window.innerWidth >= 1024);
   const timeoutIdsRef = useRef<number[]>([]);
 
   useEffect(() => {
+    const handleResize = () => setIsDesktop(window.innerWidth >= 1024);
+    window.addEventListener("resize", handleResize);
     return () => {
-      timeoutIdsRef.current.forEach((id) => window.clearTimeout(id));
+      window.removeEventListener("resize", handleResize);
+      timeoutIdsRef.current.forEach((id: number) => window.clearTimeout(id));
       timeoutIdsRef.current = [];
     };
   }, []);
@@ -91,57 +95,58 @@ export const TableOfContents = () => {
   return (
     <>
       {/* Desktop Sidebar */}
-      <aside
-        className="hidden lg:block"
-        style={{
-          position: "fixed",
-          top: "7rem",
-          right: "2rem",
-          width: "180px",
-          maxHeight: "calc(100vh - 9rem)",
-          overflowY: "auto",
-          zIndex: 100,
-        }}
-      >
-        <nav style={{ borderLeft: "1px solid var(--color-border)", paddingLeft: "1.25rem" }}>
-          <div style={{ fontSize: "10px", fontWeight: 700, color: "var(--color-text-subtle)", textTransform: "uppercase", letterSpacing: "0.1em", marginBottom: "1rem" }}>
-            Table of Contents
-          </div>
-          <ul style={{ margin: 0, padding: 0, listStyle: "none", display: "flex", flexDirection: "column", gap: "0.25rem" }}>
-            {sections.map(({ id, title }) => (
-              <li key={id} style={{ margin: 0, padding: 0 }}>
-                <button
-                  onClick={() => handleClick(id)}
-                  style={{
-                    fontSize: "12px",
-                    textAlign: "left",
-                    width: "100%",
-                    display: "block",
-                    padding: "0.25rem 0.5rem",
-                    borderRadius: "4px",
-                    border: "none",
-                    cursor: "pointer",
-                    background: activeId === id ? "var(--color-bg-subtle)" : "transparent",
-                    color: activeId === id ? "var(--color-accent)" : "var(--color-text-subtle)",
-                    fontWeight: activeId === id ? 700 : 400,
-                    transition: "color 0.15s, background 0.15s",
-                  }}
-                  onMouseEnter={e => { if (activeId !== id) (e.target as HTMLElement).style.color = "var(--color-text)"; }}
-                  onMouseLeave={e => { if (activeId !== id) (e.target as HTMLElement).style.color = "var(--color-text-subtle)"; }}
-                >
-                  {title}
-                </button>
-              </li>
-            ))}
-          </ul>
-        </nav>
-      </aside>
+      {isDesktop && (
+        <aside
+          style={{
+            position: "fixed",
+            top: "7rem",
+            right: "2rem",
+            width: "180px",
+            maxHeight: "calc(100vh - 9rem)",
+            overflowY: "auto",
+            zIndex: 100,
+          }}
+        >
+          <nav style={{ borderLeft: "1px solid var(--color-border)", paddingLeft: "1.25rem" }}>
+            <div style={{ fontSize: "10px", fontWeight: 700, color: "var(--color-text-subtle)", textTransform: "uppercase", letterSpacing: "0.1em", marginBottom: "1rem" }}>
+              Table of Contents
+            </div>
+            <ul style={{ margin: 0, padding: 0, listStyle: "none", display: "flex", flexDirection: "column", gap: "0.25rem" }}>
+              {sections.map(({ id, title }) => (
+                <li key={id} style={{ margin: 0, padding: 0 }}>
+                  <button
+                    onClick={() => handleClick(id)}
+                    style={{
+                      fontSize: "12px",
+                      textAlign: "left",
+                      width: "100%",
+                      display: "block",
+                      padding: "0.25rem 0.5rem",
+                      borderRadius: "4px",
+                      border: "none",
+                      cursor: "pointer",
+                      background: activeId === id ? "var(--color-bg-subtle)" : "transparent",
+                      color: activeId === id ? "var(--color-accent)" : "var(--color-text-subtle)",
+                      fontWeight: activeId === id ? 700 : 400,
+                      transition: "color 0.15s, background 0.15s",
+                    }}
+                    onMouseEnter={e => { if (activeId !== id) (e.target as HTMLElement).style.color = "var(--color-text)"; }}
+                    onMouseLeave={e => { if (activeId !== id) (e.target as HTMLElement).style.color = "var(--color-text-subtle)"; }}
+                  >
+                    {title}
+                  </button>
+                </li>
+              ))}
+            </ul>
+          </nav>
+        </aside>
+      )}
 
 
       {/* Mobile Drawer Overlay */}
-      {isTOCOpen && (
+      {!isDesktop && isTOCOpen && (
         <div 
-          className="lg:hidden fixed inset-0 bg-black/40 backdrop-blur-sm z-[300] transition-opacity animate-in fade-in"
+          className="fixed inset-0 bg-black/40 backdrop-blur-sm z-[300] transition-opacity animate-in fade-in"
           onClick={() => setIsTOCOpen(false)}
         >
           <div 
