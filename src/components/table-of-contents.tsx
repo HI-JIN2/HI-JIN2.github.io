@@ -143,7 +143,7 @@ export const TableOfContents = () => {
         className="lg:hidden"
         style={{
           position: "fixed",
-          bottom: "1.5rem",
+          top: "5.5rem",
           right: "1.5rem",
           width: "3.5rem",
           height: "3.5rem",
