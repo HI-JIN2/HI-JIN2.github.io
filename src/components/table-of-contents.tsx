@@ -44,6 +44,8 @@ export const TableOfContents = () => {
       const documentHeight = document.documentElement.scrollHeight;
       
       const lastSection = sections[sections.length - 1];
+      if (!lastSection) return;
+
       const lastElement = document.getElementById(lastSection.id);
       if (lastElement) {
         if (viewportBottom >= documentHeight - 50) {
@@ -54,10 +56,12 @@ export const TableOfContents = () => {
 
       let activeSection = "";
       for (let i = sections.length - 1; i >= 0; i--) {
-        const element = document.getElementById(sections[i].id);
+        const section = sections[i];
+        if (!section) continue;
+        const element = document.getElementById(section.id);
         if (element) {
           if (scrollPosition >= element.offsetTop) {
-            activeSection = sections[i].id;
+            activeSection = section.id;
             break;
           }
         }
@@ -141,11 +145,11 @@ export const TableOfContents = () => {
       {/* Mobile Drawer Overlay */}
       {isTOCOpen && (
         <div 
-          className="lg:hidden fixed inset-0 bg-black/40 backdrop-blur-sm z-[300] transition-opacity animate-in fade-in"
+          className="lg:hidden fixed inset-0 bg-black/40 backdrop-blur-sm z-[300] transition-opacity animate-in fade-in flex justify-center items-end"
           onClick={() => setIsTOCOpen(false)}
         >
           <div 
-            className="absolute bottom-0 left-1/2 -translate-x-1/2 w-full max-w-[500px] bg-[color:var(--color-bg)] rounded-t-3xl p-8 pb-12 shadow-2xl animate-in slide-in-from-bottom"
+            className="relative w-full max-w-[500px] bg-[color:var(--color-bg)] rounded-t-3xl p-6 pb-10 shadow-2xl animate-in slide-in-from-bottom"
             onClick={(e) => e.stopPropagation()}
           >
             <div className="w-12 h-1.5 bg-[color:var(--color-border)] rounded-full mx-auto mb-8"></div>
