@@ -5,7 +5,7 @@ const URL_REGEX = /(https?:\/\/[^\s\)]+)/g;
 // 하이라이트 패턴: ==텍스트==
 const HIGHLIGHT_REGEX = /(==.+?==)/g;
 
-const HIGHLIGHT_COLOR = "var(--color-accent)";
+const HIGHLIGHT_COLOR = "var(--color-link)";
 
 export const parseBold = (text: string): React.ReactNode[] => {
   // 먼저 URL을 찾아서 링크로 변환
@@ -68,7 +68,7 @@ export const parseBold = (text: string): React.ReactNode[] => {
             processed.push(
               <span
                 key={keyIndex++}
-                className="font-semibold"
+                className="font-bold"
                 style={{ color: HIGHLIGHT_COLOR }}
               >
                 {highlightContent}

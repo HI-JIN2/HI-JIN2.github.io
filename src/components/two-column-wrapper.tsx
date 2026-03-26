@@ -7,11 +7,17 @@ type Props = {
 
 export const TwoColumnWrapper = ({ left, right }: Props) => {
   return (
-    <div className="flex flex-col gap-4 mb-10">
-      <div className="flex-shrink-0">
-        {left}
-      </div>
-      <div className="flex-1 min-w-0 border-l-2 border-[color:var(--color-border)] pl-6 ml-1">
+    <div
+      style={{
+        display: "grid",
+        gridTemplateColumns: "200px 1fr",
+        columnGap: "2.5rem",
+        rowGap: "1.5rem",
+        marginBottom: "4rem",
+      }}
+    >
+      <div style={{ flexShrink: 0 }}>{left}</div>
+      <div style={{ minWidth: 0 }}>
         {right}
       </div>
     </div>
