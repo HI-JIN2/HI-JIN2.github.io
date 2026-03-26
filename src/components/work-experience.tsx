@@ -2,15 +2,13 @@ import { useResumeData } from "../context/resume-context";
 import { TwoColumnWrapper } from "./two-column-wrapper";
 import { formatDateRange } from "../utils/calculate-duration";
 import { parseBold } from "../utils/parse-bold";
+import { Section } from "./Section";
 
 export const WorkExperience = () => {
   const { experience } = useResumeData();
 
   return (
-    <section id="work" className="mt-16">
-      <h1 className="text-2xl font-bold mb-8 border-b-2 border-[color:var(--color-border)] pb-2 uppercase tracking-tighter">
-        Work Experience
-      </h1>
+    <Section title="Work Experience" id="work" mt={64}>
       <div className="flex flex-col gap-12">
         {experience.map((exp, idx) => {
           const { corp, position, from, to, about = [], features = [] } = exp;
@@ -61,6 +59,6 @@ export const WorkExperience = () => {
           );
         })}
       </div>
-    </section>
+    </Section>
   );
 };

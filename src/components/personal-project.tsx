@@ -11,14 +11,13 @@ const SubTitle = ({ title }: { title: string }) => (
   </div>
 );
 
+import { Section } from "./Section";
+
 export const PersonalProject = () => {
   const { personalProjects: project = [] } = useResumeData();
 
   return (
-    <section id="project" className="mt-16">
-      <h1 className="text-2xl font-bold mb-8 border-b-2 border-[color:var(--color-border)] pb-2 uppercase tracking-tighter">
-        Personal Projects
-      </h1>
+    <Section title="Personal Projects" id="project" mt={64}>
       <div className="flex flex-col gap-12">
         {project.map((p, idx) => (
           <TwoColumnWrapper
@@ -75,6 +74,6 @@ export const PersonalProject = () => {
           />
         ))}
       </div>
-    </section>
+    </Section>
   );
 };
