@@ -5,7 +5,7 @@ import {
   useMemo,
   useState,
 } from "react";
-import { useNavigate, useSearchParams } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import {
   DEFAULT_RESUME_TYPE,
   ResumeContent,
@@ -21,9 +21,9 @@ type ResumeContextValue = {
 
 const ResumeContext = createContext<ResumeContextValue | null>(null);
 
-const resolveInitialType = (searchParams: URLSearchParams): ResumeType => {
-  // 쿼리 파라미터에서 General=true 확인
-  if (searchParams.get("General") === "true") {
+const resolveInitialType = (pathname: string): ResumeType => {
+  // 경로에서 타입 확인
+  if (pathname === "/sw-engineer" || pathname === "/general") {
     return "general";
   }
   // 기본값은 android
@@ -32,30 +32,25 @@ const resolveInitialType = (searchParams: URLSearchParams): ResumeType => {
 
 export const ResumeProvider = ({ children }: { children: React.ReactNode }) => {
   const navigate = useNavigate();
-  const [searchParams] = useSearchParams();
+  const { pathname } = useLocation();
   const [type, setType] = useState<ResumeType>(() =>
-    resolveInitialType(searchParams)
+    resolveInitialType(pathname)
   );
   const data = useMemo(() => getResumeContent(type), [type]);
 
-  // 쿼리 파라미터 변경 시 타입 업데이트
+  // 경로 변경 시 타입 업데이트
   useEffect(() => {
-    const newType = resolveInitialType(searchParams);
+    const newType = resolveInitialType(pathname);
     if (newType !== type) {
       setType(newType);
     }
-  }, [searchParams, type]);
+  }, [pathname, type]);
 
-  // 타입 변경 시 쿼리 파라미터 업데이트
+  // 타입 변경 시 경로 업데이트
   const handleSetType = (newType: ResumeType) => {
     setType(newType);
-    const newSearchParams = new URLSearchParams(searchParams);
-    if (newType === "general") {
-      newSearchParams.set("General", "true");
-    } else {
-      newSearchParams.delete("General");
-    }
-    navigate({ pathname: "/", search: newSearchParams.toString() }, { replace: true });
+    const targetPath = newType === "general" ? "/sw-engineer" : "/android";
+    navigate(targetPath, { replace: true });
   };
 
   return (

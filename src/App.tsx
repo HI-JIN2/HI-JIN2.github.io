@@ -23,9 +23,10 @@ function RedirectHandler() {
       return;
     }
     
-    // 경로가 /가 아니면 /로 리다이렉트 (쿼리 파라미터는 유지)
-    if (location.pathname !== '/') {
-      navigate({ pathname: '/', search: location.search, hash: location.hash }, { replace: true });
+    // 허용된 경로가 아니면 /android로 리다이렉트
+    const allowedPaths = ['/android', '/sw-engineer', '/general'];
+    if (!allowedPaths.includes(location.pathname)) {
+      navigate({ pathname: '/android', search: location.search, hash: location.hash }, { replace: true });
     }
   }, [navigate, location]);
   
