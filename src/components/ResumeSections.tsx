@@ -33,7 +33,7 @@ export const AboutMe = () => {
 };
 
 /**
- * 2. Skills Section
+ * 2. Skills Section (1-Column)
  */
 export const Skills = () => {
   const { skills } = useResumeData();
@@ -42,17 +42,14 @@ export const Skills = () => {
     <Section title="Skills" id="skills" mt={64}>
       <div style={{ display: "flex", flexDirection: "column", gap: "2rem" }}>
         {skills.map((category, idx) => (
-          <TwoColumnWrapper
-            key={idx}
-            left={<h3 style={{ fontSize: "1rem", fontWeight: 700, color: "var(--color-text)", margin: 0 }}>{category.title}</h3>}
-            right={
-              <ul style={{ listStyleType: "disc", color: "var(--color-text)" }}>
-                {category.items.map((skill, sIdx) => (
-                  <li key={sIdx}>{parseBold(skill)}</li>
-                ))}
-              </ul>
-            }
-          />
+          <div key={idx} className="space-y-3">
+            <h3 style={{ fontSize: "1rem", fontWeight: 700, color: "var(--color-text)", margin: 0 }}>{category.title}</h3>
+            <ul style={{ listStyleType: "disc", color: "var(--color-text)" }}>
+              {category.items.map((skill, sIdx) => (
+                <li key={sIdx}>{parseBold(skill)}</li>
+              ))}
+            </ul>
+          </div>
         ))}
       </div>
     </Section>
@@ -212,9 +209,20 @@ export const OpenSourceProject = ({ title, sectionTitle }: { title?: string; sec
                 }
                 right={
                   <ul style={{ listStyleType: "disc", display: "flex", flexDirection: "column", gap: "0.25rem" }}>
-                    {feature.descriptions.map((desc, i) => (
-                      <li key={i}>{parseBold(desc)}</li>
-                    ))}
+                    {feature.descriptions.map((desc, i) => {
+                      const href = feature.links && feature.links[i];
+                      return (
+                        <li key={i}>
+                          {href ? (
+                            <a href={href} target="_blank" rel="noopener noreferrer" className="hover:underline text-[color:var(--color-link)] font-medium">
+                              {parseBold(desc)}
+                            </a>
+                          ) : (
+                            parseBold(desc)
+                          )}
+                        </li>
+                      );
+                    })}
                   </ul>
                 }
               />
@@ -238,15 +246,25 @@ export const SimpleList = ({ title, sectionTitle, sectionId }: { title: string; 
     <Section title={sectionTitle || list.title} mt={64} id={sectionId || list.title.toLowerCase()}>
       <div style={{ display: "flex", flexDirection: "column", gap: "2rem" }}>
         {list.features.map((f, fIdx) => (
-          <TwoColumnWrapper
-            key={fIdx}
-            left={f.title ? <h3 style={{ fontSize: "1rem", fontWeight: 700, color: "var(--color-text)", margin: 0 }}>{f.title}</h3> : null}
-            right={
-              <ul style={{ listStyleType: "disc", color: "var(--color-text)" }}>
-                {f.descriptions.map((desc, i) => <li key={i}>{parseBold(desc)}</li>)}
-              </ul>
-            }
-          />
+          <div key={fIdx} className="space-y-3">
+            {f.title && <h3 style={{ fontSize: "1rem", fontWeight: 700, color: "var(--color-text)", margin: 0 }}>{f.title}</h3>}
+            <ul style={{ listStyleType: "disc", color: "var(--color-text)" }}>
+              {f.descriptions.map((desc, i) => {
+                const href = f.links && f.links[i];
+                return (
+                  <li key={i}>
+                    {href ? (
+                      <a href={href} target="_blank" rel="noopener noreferrer" className="hover:underline text-[color:var(--color-link)] font-medium">
+                        {parseBold(desc)}
+                      </a>
+                    ) : (
+                      parseBold(desc)
+                    )}
+                  </li>
+                );
+              })}
+            </ul>
+          </div>
         ))}
       </div>
     </Section>
