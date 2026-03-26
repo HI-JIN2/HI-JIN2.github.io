@@ -88,21 +88,19 @@ body {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   transition: background-color 0.2s, color 0.2s;
+  padding-top: 2rem;
 }
-
-/* 제거된 그라데이션 및 애니메이션 */
 
 h1, h2, h3, h4, h5, h6 {
   color: var(--color-text);
   font-weight: 700;
   line-height: 1.25;
-  margin-top: 2rem;
+  margin-top: 1.5rem;
   margin-bottom: 1rem;
-  padding-bottom: 0.3em;
 }
 
-h1 { font-size: 2.25rem; border-bottom: 1px solid var(--color-border); }
-h2 { font-size: 1.5rem; border-bottom: 1px solid var(--color-border); }
+h1 { font-size: 2rem; border-bottom: 1px solid var(--color-border); padding-bottom: 0.3em; }
+h2 { font-size: 1.5rem; border-bottom: 1px solid var(--color-border); padding-bottom: 0.3em; }
 h3 { font-size: 1.25rem; }
 
 a {

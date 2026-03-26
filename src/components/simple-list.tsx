@@ -36,7 +36,7 @@ export const SimpleList = ({ title, sectionTitle, sectionId }: Props) => {
   const finalSectionId = sectionId || title.toLowerCase().replace(/\s+/g, "-");
 
   return (
-    <Section title={sectionTitle || listData.title} mt={80} id={finalSectionId}>
+    <Section title={sectionTitle || listData.title} mt={48} id={finalSectionId}>
       <div className="flex flex-col gap-10">
         {items.map((item, itemIndex) => {
           const hasTitle = item.title && item.title !== listData.title && item.title.trim() !== "";

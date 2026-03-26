@@ -60,7 +60,7 @@ export const OpenSourceProject = ({ title, sectionTitle }: Props = {}) => {
         );
 
         return (
-          <Section key={project.title} title={sectionTitle || project.title} mt={80} id={sectionId}>
+          <Section key={project.title} title={sectionTitle || project.title} mt={48} id={sectionId}>
             <div className="flex flex-col gap-16">
               {useTwoColumn ? (
                 <TwoColumnWrapper

@@ -3,13 +3,11 @@ type Props = {
 };
 export const SpecSheet = ({ items }: Props) => {
   return (
-    <div className="flex flex-wrap gap-2">
-      {items.map((item) => (
-        <span
-          key={item}
-          className="px-2.5 py-1 bg-[color:var(--color-surface-muted)] rounded-[var(--ui-radius-control)] text-sm text-[color:var(--color-text-muted)] border border-[color:var(--color-border)]"
-        >
-          {item}
+    <div className="flex flex-wrap gap-x-2 gap-y-1 text-sm">
+      {items.map((item, index) => (
+        <span key={item} className="text-[color:var(--color-text-muted)]">
+          <code>{item}</code>
+          {index < items.length - 1 && <span className="opacity-50">,</span>}
         </span>
       ))}
     </div>
