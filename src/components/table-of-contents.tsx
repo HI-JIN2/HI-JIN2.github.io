@@ -10,6 +10,7 @@ export const TableOfContents = () => {
   const { skills } = useResumeData();
   const [activeId, setActiveId] = useState<string>("");
   const [isScrolling, setIsScrolling] = useState(false);
+  const [isOpen, setIsOpen] = useState(false); // Mobile drawer state
   const timeoutIdsRef = useRef<number[]>([]);
 
   useEffect(() => {
@@ -18,13 +19,14 @@ export const TableOfContents = () => {
       timeoutIdsRef.current = [];
     };
   }, []);
+
   const sections = useMemo<Section[]>(() => {
     return [
-      { id: "about", title: "About" },
+      { id: "about", title: "About Me" },
       ...(skills && skills.length > 0 ? [{ id: "skills", title: "Skills" }] : []),
-      { id: "work-experience", title: "Work Experience" },
-      { id: "side-project", title: "Side Project" },
-      { id: "award", title: "Award" },
+      { id: "work", title: "Work Experience" },
+      { id: "project", title: "Personal Projects" },
+      { id: "award", title: "Awards" },
       { id: "community", title: "Community" },
       { id: "presentation", title: "Presentation" },
       { id: "interview", title: "Interview" },
@@ -35,188 +37,158 @@ export const TableOfContents = () => {
 
   useEffect(() => {
     const updateActiveSection = () => {
-      // 수동 스크롤 중이면 업데이트하지 않음
-      if (isScrolling) {
-        return;
-      }
+      if (isScrolling) return;
 
       const scrollPosition = window.scrollY + 200;
       const viewportBottom = window.scrollY + window.innerHeight;
       const documentHeight = document.documentElement.scrollHeight;
       
-      // 페이지 맨 아래에 도달했거나 거의 도달한 경우 마지막 섹션 활성화
       const lastSection = sections[sections.length - 1];
       const lastElement = document.getElementById(lastSection.id);
       if (lastElement) {
-        const lastElementTop = lastElement.offsetTop;
-        const lastElementBottom = lastElementTop + lastElement.offsetHeight;
-        
-        // 마지막 섹션이 화면에 보이거나 페이지 하단 근처에 있으면 활성화
-        if (viewportBottom >= documentHeight - 100 || 
-            (scrollPosition >= lastElementTop && viewportBottom >= lastElementBottom - 200)) {
+        if (viewportBottom >= documentHeight - 50) {
           setActiveId(lastSection.id);
           return;
         }
       }
 
-      // 아래에서 위로 순회하여 현재 스크롤 위치보다 위에 있는 첫 번째 섹션 찾기
       let activeSection = "";
       for (let i = sections.length - 1; i >= 0; i--) {
         const element = document.getElementById(sections[i].id);
         if (element) {
-          const elementTop = element.offsetTop;
-          
-          // 섹션이 뷰포트 상단 기준선보다 위에 있으면
-          if (scrollPosition >= elementTop) {
-            // 마지막 섹션인 경우 더 관대하게 처리
-            if (i === sections.length - 1) {
-              // 마지막 섹션이 화면에 보이기 시작하면 활성화
-              if (elementTop <= viewportBottom - 100) {
-                activeSection = sections[i].id;
-                break;
-              }
-            } else {
-              activeSection = sections[i].id;
-              break;
-            }
+          if (scrollPosition >= element.offsetTop) {
+            activeSection = sections[i].id;
+            break;
           }
         }
       }
 
-      if (activeSection) {
-        setActiveId(activeSection);
-      }
+      if (activeSection) setActiveId(activeSection);
     };
 
-    // 초기 실행
     updateActiveSection();
-
-    // 스크롤 이벤트 리스너
-    const handleScroll = () => {
-      updateActiveSection();
-    };
-
+    const handleScroll = () => updateActiveSection();
     window.addEventListener("scroll", handleScroll, { passive: true });
 
-    // Intersection Observer
-    const observer = new IntersectionObserver(
-      (entries) => {
-        // 수동 스크롤 중이면 업데이트하지 않음
-        if (isScrolling) {
-          return;
-        }
-
-        const visibleSections = entries
-          .filter((entry) => entry.isIntersecting)
-          .map((entry) => ({
-            id: entry.target.id,
-            top: entry.boundingClientRect.top,
-            ratio: entry.intersectionRatio,
-          }));
-
-        if (visibleSections.length > 0) {
-          // 가장 많이 보이는 섹션 선택 (intersectionRatio가 높은 것)
-          const mostVisible = visibleSections.reduce((prev, current) => {
-            return current.ratio > prev.ratio ? current : prev;
-          });
-          
-          // 뷰포트 상단 근처에 있는 섹션 우선
-          const viewportTop = 200;
-          const closestToTop = visibleSections.reduce((prev, current) => {
-            const prevDistance = Math.abs(prev.top - viewportTop);
-            const currentDistance = Math.abs(current.top - viewportTop);
-            return currentDistance < prevDistance ? current : prev;
-          });
-          
-          // 두 조건을 종합하여 선택
-          if (mostVisible.ratio > 0.3) {
-            setActiveId(mostVisible.id);
-          } else {
-            setActiveId(closestToTop.id);
-          }
-        }
-      },
-      {
-        rootMargin: "-10% 0% -70% 0%",
-        threshold: [0, 0.1, 0.3, 0.5, 0.7, 1],
-      }
-    );
-
-    sections.forEach(({ id }) => {
-      const element = document.getElementById(id);
-      if (element) {
-        observer.observe(element);
-      }
-    });
-
-    return () => {
-      window.removeEventListener("scroll", handleScroll);
-      observer.disconnect();
-    };
+    return () => window.removeEventListener("scroll", handleScroll);
   }, [isScrolling, sections]);
 
   const handleClick = (id: string) => {
     const element = document.getElementById(id);
     if (element) {
-      // 즉시 활성화 상태 업데이트
       setActiveId(id);
       setIsScrolling(true);
-      
-      // 스크롤 위치 계산
+      setIsOpen(false); // Close drawer on click
+
       const yOffset = -100;
       const y = element.getBoundingClientRect().top + window.pageYOffset + yOffset;
-      
-      // 스크롤 실행
       window.scrollTo({ top: Math.max(0, y), behavior: "smooth" });
-      
-      // 스크롤 완료 후 다시 확인
-      timeoutIdsRef.current.push(window.setTimeout(() => {
-        const finalElement = document.getElementById(id);
-        if (finalElement) {
-          const finalY = finalElement.getBoundingClientRect().top + window.pageYOffset + yOffset;
-          window.scrollTo({ top: Math.max(0, finalY), behavior: "smooth" });
-        }
-        // 확실하게 활성화 상태 유지
-        setActiveId(id);
-        
-        // 스크롤 완료 후 약간의 지연을 두고 감지 재개
-        timeoutIdsRef.current.push(window.setTimeout(() => {
-          // 마지막 확인: 여전히 클릭한 섹션이 활성화되어 있어야 함
-          const checkElement = document.getElementById(id);
-          if (checkElement) {
-            const checkY = checkElement.getBoundingClientRect().top + window.pageYOffset;
-            const currentScroll = window.scrollY;
-            // 스크롤 위치가 해당 섹션 근처에 있으면 활성화 유지
-            if (Math.abs(currentScroll - checkY) < 300) {
-              setActiveId(id);
-            }
-          }
-          setIsScrolling(false);
-        }, 800));
-      }, 300));
+
+      timeoutIdsRef.current.push(window.setTimeout(() => setIsScrolling(false), 1000));
     }
   };
 
   return (
-    <aside className="hidden xl:block fixed right-8 top-1/2 -translate-y-1/2 w-48">
-      <nav className="sticky top-24">
-        <ul className="space-y-2">
-          {sections.map(({ id, title }) => (
-            <li key={id}>
-              <button
-                onClick={() => handleClick(id)}
-                className={`text-sm transition-colors text-left w-full ${
-                  activeId === id
-                    ? "text-[color:var(--color-text)] font-semibold"
-                    : "text-[color:var(--color-text-subtle)] hover:text-[color:var(--color-text-muted)]"
-                }`}
-              >
-                {title}
+    <>
+      {/* Desktop Sidebar */}
+      <aside
+        className="hidden lg:block"
+        style={{
+          position: "fixed",
+          top: "7rem",
+          right: "2rem",
+          width: "180px",
+          maxHeight: "calc(100vh - 9rem)",
+          overflowY: "auto",
+          zIndex: 100,
+        }}
+      >
+        <nav style={{ borderLeft: "1px solid var(--color-border)", paddingLeft: "1.25rem" }}>
+          <div style={{ fontSize: "10px", fontWeight: 700, color: "var(--color-text-subtle)", textTransform: "uppercase", letterSpacing: "0.1em", marginBottom: "1rem" }}>
+            Table of Contents
+          </div>
+          <ul style={{ margin: 0, padding: 0, listStyle: "none", display: "flex", flexDirection: "column", gap: "0.25rem" }}>
+            {sections.map(({ id, title }) => (
+              <li key={id} style={{ margin: 0, padding: 0 }}>
+                <button
+                  onClick={() => handleClick(id)}
+                  style={{
+                    fontSize: "12px",
+                    textAlign: "left",
+                    width: "100%",
+                    display: "block",
+                    padding: "0.25rem 0.5rem",
+                    borderRadius: "4px",
+                    border: "none",
+                    cursor: "pointer",
+                    background: activeId === id ? "var(--color-bg-subtle)" : "transparent",
+                    color: activeId === id ? "var(--color-accent)" : "var(--color-text-subtle)",
+                    fontWeight: activeId === id ? 700 : 400,
+                    transition: "color 0.15s, background 0.15s",
+                  }}
+                  onMouseEnter={e => { if (activeId !== id) (e.target as HTMLElement).style.color = "var(--color-text)"; }}
+                  onMouseLeave={e => { if (activeId !== id) (e.target as HTMLElement).style.color = "var(--color-text-subtle)"; }}
+                >
+                  {title}
+                </button>
+              </li>
+            ))}
+          </ul>
+        </nav>
+      </aside>
+
+      {/* Mobile Drawer Trigger (Floating Action Button) */}
+      <button
+        onClick={() => setIsOpen(true)}
+        className="xl:hidden fixed bottom-8 right-8 w-14 h-14 bg-[color:var(--color-accent)] text-white rounded-full shadow-2xl z-[250] flex items-center justify-center hover:scale-110 transition-transform active:scale-95"
+        aria-label="Open menu"
+      >
+        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+          <line x1="3" y1="12" x2="21" y2="12"></line>
+          <line x1="3" y1="6" x2="21" y2="6"></line>
+          <line x1="3" y1="18" x2="21" y2="18"></line>
+        </svg>
+      </button>
+
+      {/* Mobile Drawer Overlay */}
+      {isOpen && (
+        <div 
+          className="xl:hidden fixed inset-0 bg-black/40 backdrop-blur-sm z-[300] transition-opacity animate-in fade-in"
+          onClick={() => setIsOpen(false)}
+        >
+          <div 
+            className="absolute bottom-0 left-0 right-0 bg-[color:var(--color-bg)] rounded-t-3xl p-8 pb-12 shadow-2xl animate-in slide-in-from-bottom"
+            onClick={(e) => e.stopPropagation()}
+          >
+            <div className="w-12 h-1.5 bg-[color:var(--color-border)] rounded-full mx-auto mb-8"></div>
+            <div className="flex justify-between items-center mb-8">
+              <h2 className="text-xl font-bold">Contents</h2>
+              <button onClick={() => setIsOpen(false)} className="text-[color:var(--color-text-subtle)]">
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+                  <line x1="18" y1="6" x2="6" y2="18"></line>
+                  <line x1="6" y1="6" x2="18" y2="18"></line>
+                </svg>
               </button>
-            </li>
-          ))}
-        </ul>
-      </nav>
-    </aside>
+            </div>
+            <ul className="grid grid-cols-1 gap-3 m-0 p-0 list-none">
+              {sections.map(({ id, title }) => (
+                <li key={id} className="m-0 p-0">
+                  <button
+                    onClick={() => handleClick(id)}
+                    className={`w-full text-left py-4 px-6 rounded-2xl text-base font-medium transition-colors ${
+                      activeId === id
+                        ? "bg-[color:var(--color-accent)] text-white"
+                        : "bg-[color:var(--color-bg-subtle)] text-[color:var(--color-text)] active:bg-[color:var(--color-border-subtle)]"
+                    }`}
+                  >
+                    {title}
+                  </button>
+                </li>
+              ))}
+            </ul>
+          </div>
+        </div>
+      )}
+    </>
   );
 };

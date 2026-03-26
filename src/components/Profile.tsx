@@ -7,13 +7,34 @@ export const Profile = () => {
   const items = profile.links || [];
 
   return (
-    <Section title={profile.name} mb={64}>
+    <Section mb={48}>
       {profile.headline && (
-        <p className="text-[color:var(--color-text-muted)] text-base leading-relaxed -mt-4 mb-6">
+        <h1
+          style={{
+            fontSize: "2rem",
+            fontWeight: 700,
+            color: "var(--color-text)",
+            border: "none",
+            paddingTop: 0,
+            margin: 0,
+            marginBottom: "2rem",
+            lineHeight: 1.3,
+          }}
+        >
           {profile.headline}
-        </p>
+        </h1>
       )}
-      <div className="flex flex-wrap gap-x-6 gap-y-2">
+
+      <div
+        style={{
+          display: "flex",
+          flexDirection: "column",
+          gap: "0.6rem",
+          marginTop: "1.5rem",
+          paddingTop: "1.5rem",
+          borderTop: "1px solid var(--color-border)",
+        }}
+      >
         {items.map(({ label, value, href }) => {
           const resolvedHref =
             href ||
@@ -22,20 +43,40 @@ export const Profile = () => {
               : value.includes("@")
               ? `mailto:${value}`
               : undefined);
-              
-            return (
-              <div key={`${label}-${value}`} className="flex items-center gap-2">
-                <span className="text-[color:var(--color-text-subtle)] text-sm font-medium">{label}</span>
-                {resolvedHref ? (
-                  <Link href={resolvedHref}>
-                    {value}
-                  </Link>
-                ) : (
-                  <span className="text-[color:var(--color-text)]">{value}</span>
-                )}
-              </div>
-            );
-          })}
+
+          return (
+            <div
+              key={`${label}-${value}`}
+              style={{ display: "flex", alignItems: "baseline" }}
+            >
+              <span
+                style={{
+                  fontSize: "11px",
+                  fontWeight: 600,
+                  color: "var(--color-text-subtle)",
+                  textTransform: "uppercase",
+                  letterSpacing: "0.05em",
+                  width: "90px",
+                  flexShrink: 0,
+                }}
+              >
+                {label}
+              </span>
+              {resolvedHref ? (
+                <Link
+                  href={resolvedHref}
+                  style={{ textDecoration: "none", fontSize: "13px" }}
+                >
+                  {value}
+                </Link>
+              ) : (
+                <span style={{ fontSize: "13px", color: "var(--color-text)" }}>
+                  {value}
+                </span>
+              )}
+            </div>
+          );
+        })}
       </div>
     </Section>
   );
