@@ -77,7 +77,7 @@ export const OpenSourceProject = ({ title, sectionTitle }: Props = {}) => {
                     })()
                   }
                   right={
-                    <ul style={{ margin: 0, padding: "0 0 0 1.2rem", listStyleType: "disc", display: "flex", flexDirection: "column", gap: "0.25rem" }}>
+                    <ul style={{ listStyleType: "disc", display: "flex", flexDirection: "column", gap: "0.25rem" }}>
                       {feature.descriptions.map((description, index) => {
                         const href = feature.links && feature.links[index];
                         return (
