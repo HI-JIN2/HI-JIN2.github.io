@@ -4,6 +4,9 @@ import dayjs from "dayjs";
  * 날짜 형식 변환: "2023.12" -> dayjs 객체
  */
 const formatDate = (dateStr: string) => {
+  if (!dateStr || !dateStr.includes(".")) {
+    return dayjs().startOf("month");
+  }
   const [year, month] = dateStr.split(".");
   return dayjs(`${year}-${month.padStart(2, "0")}-01`);
 };
