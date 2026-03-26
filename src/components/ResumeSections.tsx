@@ -200,7 +200,7 @@ export const OpenSourceProject = ({ title, sectionTitle }: { title?: string; sec
                     const rest = dMatch ? t.slice(0, dMatch.index).trim() : t;
                     const pts = rest.split(" - ");
                     return (
-                      <div style={{ display: "flex", flexDirection: "column", gap: "0.15rem" }}>
+                      <div style={{ display: "flex", flexDirection: "column", gap: "0.15rem", marginTop: 0 }}>
                         <h3 style={{ fontSize: "1rem", fontWeight: 700, color: "var(--color-text)", margin: 0, lineHeight: 1.2 }}>{pts[0]}</h3>
                         {(pts[1] || d) && <p style={{ fontSize: "13px", color: "var(--color-text-subtle)", margin: 0, lineHeight: 1.3 }}>{pts[1]} {d}</p>}
                       </div>
@@ -208,7 +208,7 @@ export const OpenSourceProject = ({ title, sectionTitle }: { title?: string; sec
                   })()
                 }
                 right={
-                  <ul style={{ listStyleType: "disc", display: "flex", flexDirection: "column", gap: "0.25rem" }}>
+                  <ul style={{ listStyleType: "disc", display: "flex", flexDirection: "column", gap: "0.25rem", margin: 0 }}>
                     {feature.descriptions.map((desc, i) => {
                       const href = feature.links && feature.links[i];
                       return (
