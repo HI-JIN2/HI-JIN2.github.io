@@ -34,8 +34,8 @@ export const Layout = ({ children }: Props) => {
             maxWidth: "800px",
             width: "100%",
             margin: "0 auto",
-            paddingLeft: "0.75rem",
-            paddingRight: "0.75rem",
+            paddingLeft: "0.5rem",
+            paddingRight: "0.5rem",
             display: "flex",
             alignItems: "center",
             justifyContent: "space-between",
@@ -106,8 +106,8 @@ export const Layout = ({ children }: Props) => {
           margin: "0 auto",
           paddingTop: "5rem",
           paddingBottom: "4rem",
-          paddingLeft: "0.75rem",
-          paddingRight: "0.75rem",
+          paddingLeft: "0.5rem",
+          paddingRight: "0.5rem",
           position: "relative",
         }}
       >

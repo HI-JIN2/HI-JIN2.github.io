@@ -46,16 +46,35 @@ export const OpenSourceProject = ({ title, sectionTitle }: Props = {}) => {
                 <TwoColumnWrapper
                   key={featureIndex}
                   left={
-                    <div style={{ display: "flex", flexDirection: "column", gap: "0.25rem" }}>
-                      <h3 style={{ fontSize: "1rem", fontWeight: 700, color: "var(--color-text)", margin: 0, lineHeight: 1.2 }}>
-                        {feature.title}
-                      </h3>
-                      {featureIndex === 0 && hasLinks && (
-                        <div style={{ marginTop: "0.5rem" }}>
-                          <LinkList links={project.links || []} />
+                    (() => {
+                      const title = feature.title;
+                      const dateMatch = title.match(/\(([^)]+)\)$/);
+                      const date = dateMatch ? dateMatch[0] : "";
+                      const rest = dateMatch ? title.slice(0, dateMatch.index).trim() : title;
+                      
+                      // Split by " - " to separate activity name and role
+                      const parts = rest.split(" - ");
+                      const activityName = parts[0];
+                      const role = parts.slice(1).join(" - ");
+                      
+                      return (
+                        <div style={{ display: "flex", flexDirection: "column", gap: "0.15rem" }}>
+                          <h3 style={{ fontSize: "1rem", fontWeight: 700, color: "var(--color-text)", margin: 0, lineHeight: 1.2 }}>
+                            {activityName}
+                          </h3>
+                          {(role || date) && (
+                            <p style={{ fontSize: "11px", color: "var(--color-text-subtle)", margin: 0, lineHeight: 1.3 }}>
+                              {role} {date}
+                            </p>
+                          )}
+                          {featureIndex === 0 && hasLinks && (
+                            <div style={{ marginTop: "0.5rem" }}>
+                              <LinkList links={project.links || []} />
+                            </div>
+                          )}
                         </div>
-                      )}
-                    </div>
+                      );
+                    })()
                   }
                   right={
                     <ul style={{ margin: 0, padding: "0 0 0 1.2rem", listStyleType: "disc", display: "flex", flexDirection: "column", gap: "0.25rem" }}>
