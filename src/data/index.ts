@@ -94,7 +94,7 @@ export type ResumeContent = ResumeVariant & {
   lastUpdatedAt: string;
 };
 
-const LAST_UPDATED_AT = "2025. 12. 10";
+const LAST_UPDATED_AT = "2026. 03. 26";
 
 
 // name이 있는 레이아웃 (Activities)
