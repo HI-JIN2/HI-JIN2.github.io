@@ -137,21 +137,21 @@ export const PersonalProject = () => {
               <div className="flex flex-col gap-8">
                 {p.features.map((f, fIdx) => (
                   <div key={fIdx} className="space-y-4">
-                    {/* H3 Hierarchy: 성과, 주요 기여, Tech Stack */}
-                    <div className="space-y-4">
-                      {f.achievements.length > 0 && (
-                        <div>
-                          <h3 style={{ fontSize: "1rem", fontWeight: 700, color: "var(--color-text)", marginBottom: "0.5rem" }}>성과</h3>
-                          <ul style={{ listStyleType: "disc" }}>
-                            {f.achievements.map((item, i) => <li key={i}>{parseBold(item)}</li>)}
-                          </ul>
-                        </div>
-                      )}
+                    {/* H3 Hierarchy: 주요 기여 -> 성과 -> Tech Stack */}
+                    <div className="space-y-6">
                       {f.contributions.length > 0 && (
                         <div>
                           <h3 style={{ fontSize: "1rem", fontWeight: 700, color: "var(--color-text)", marginBottom: "0.5rem" }}>주요 기여</h3>
                           <ul style={{ listStyleType: "disc" }}>
                             {f.contributions.map((item, i) => <li key={i}>{parseBold(item)}</li>)}
+                          </ul>
+                        </div>
+                      )}
+                      {f.achievements.length > 0 && (
+                        <div>
+                          <h3 style={{ fontSize: "1rem", fontWeight: 700, color: "var(--color-text)", marginBottom: "0.5rem" }}>성과</h3>
+                          <ul style={{ listStyleType: "disc" }}>
+                            {f.achievements.map((item, i) => <li key={i}>{parseBold(item)}</li>)}
                           </ul>
                         </div>
                       )}
