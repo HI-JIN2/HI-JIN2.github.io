@@ -73,10 +73,10 @@
   --color-text: var(--foreground);
   --color-text-muted: var(--ui-muted);
   --color-text-subtle: var(--ui-muted-2);
-  --color-link: #7b5aad;
-  --color-link-hover: #004499;
-  --color-accent: #7b5aad;
-  --color-accent-soft: #f0f0f0;
+  --color-link: #947bce;
+  --color-link-hover: #b49fed;
+  --color-accent: #947bce;
+  --color-accent-soft: #f5f3ff;
   --color-focus: #0066cc;
   
   --font-family-sans: "Pretendard Variable", Pretendard, "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;

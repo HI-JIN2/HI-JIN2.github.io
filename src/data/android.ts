@@ -27,7 +27,7 @@ export const ANDROID_RESUME: ResumeVariant = {
     {
       title: "기술로 실질적인 문제를 빠르게 해결하는 개발자입니다.",
       descriptions: [
-        "해외 봉사활동 중 ==500권== 도서를 전산화해야 하는 상황에서, ==4시간== 만에 안드로이드 기반 바코드 스캔 시스템을 개발하여 수작업 대비 ==6배== 효율을 달성했습니다.",
+        "해외 봉사활동 중 ==500권== 도서를 전산화해야 하는 상황에서, ==4시간== 만에 바코드 스캔 시스템을 개발하여 수작업 대비 ==6배== 효율을 달성했습니다.",
       ],
     },
     {
@@ -57,10 +57,11 @@ export const ANDROID_RESUME: ResumeVariant = {
       ],
     },
     {
-      title: "Delivery & Collaboration",
+      title: "DevOps & Collaboration",
       items: [
         "==Git==과 ==GitHub Actions==, ==Fastlane==을 활용해 자동화된 ==CI/CD== 파이프라인을 구축하고 운영할 수 있습니다.",
         "==Figma==, ==Notion== 등 협업 툴을 적극 활용하여 기획/디자인 팀과 원활하게 소통합니다.",
+        "==Slack==, ==Discord==와 같은 비동기 메시지툴을 활용한 온라인에서 원활하게 소통합니다.",
       ],
     },
   ],
