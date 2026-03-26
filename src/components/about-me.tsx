@@ -7,17 +7,35 @@ export const AboutMe = () => {
 
   return (
     <Section title="About" id="about">
-      <div className="flex flex-col gap-8">
+      <div style={{ display: "flex", flexDirection: "column", gap: "1.5rem" }}>
         {about.map(({ title, descriptions }, index) => (
           <div key={index}>
-            <h3 className="font-semibold text-xl mb-3 text-[color:var(--color-text)]">{title}</h3>
-            <div className="flex flex-col gap-3">
+            <h3
+              style={{
+                fontWeight: 600,
+                fontSize: "1rem",
+                marginBottom: "0.5rem",
+                color: "var(--color-text)",
+              }}
+            >
+              {title}
+            </h3>
+            <ul
+              style={{
+                margin: 0,
+                padding: "0 0 0 1.2rem",
+                listStyleType: "disc",
+              }}
+            >
               {descriptions.map((description, descIndex) => (
-                <p key={descIndex} className="text-[color:var(--color-text-muted)] leading-relaxed">
+                <li
+                  key={descIndex}
+                  style={{ color: "var(--color-text-muted)", fontSize: "13px" }}
+                >
                   {parseBold(description)}
-                </p>
+                </li>
               ))}
-            </div>
+            </ul>
           </div>
         ))}
       </div>
