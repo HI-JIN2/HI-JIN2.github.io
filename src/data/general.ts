@@ -43,43 +43,39 @@ export const GENERAL_RESUME: ResumeVariant = {
     {
       title: "Working Style",
       items: [
-        "요구사항 정리 / 우선순위",
-        "MVP → 운영 → 개선",
-        "피드백/지표 기반 개선",
-        "코드리뷰 / 컨벤션",
+        "==사용자 요구사항==을 분석하여 우선순위를 설정하고, 핵심 가치를 빠르게 전달할 수 있는 ==MVP==를 기획하고 개발합니다.",
+        "출시 후에도 사용자 피드백과 지표를 기반으로 꾸준히 제품을 ==운영 및 개선==한 경험이 있습니다.",
+        "코드리뷰와 컨벤션을 통해 팀의 코드 품질을 유지하고 함께 성장하는 개발 문화를 지향합니다.",
       ],
     },
     {
       title: "Android",
       items: [
-        "Kotlin",
-        "Jetpack Compose",
-        "Coroutine / Flow",
-        "Hilt",
-        "Room",
-        "Firebase",
+        "==Kotlin==과 ==Jetpack Compose== 기반의 모던 안드로이드 앱을 개발하며, ==Coroutine==/==Flow==를 이용한 비동기 최적화에 능숙합니다.",
+        "==Hilt==, ==Room==, ==Firebase== 등 Jetpack 라이브러리를 활용해 견고한 앱 아키텍처를 설계합니다.",
       ],
     },
     {
       title: "Backend",
-      items: ["Kotlin", "Spring Boot", "JPA", "REST API 설계", "JavaMailSender"],
+      items: [
+        "==Spring Boot==와 ==JPA==를 활용해 안정적인 ==REST API==를 설계하고, 이메일 자동 발송 등 백그라운드 작업을 구현할 수 있습니다.",
+        "==Kotlin==과 ==Java==를 모두 활용 가능하며, 객체 지향 원칙을 준수하는 깔끔한 코드를 지향합니다.",
+      ],
     },
     {
       title: "Infra & Data",
       items: [
-        "AWS",
-        "Docker",
-        "Docker Compose",
-        "Linux",
-        "PostgreSQL",
-        "MySQL",
-        "Firebase",
-        "Flyway",
+        "==Docker==와 ==Docker Compose==를 이용해 서버 환경을 격리하고 인프라 구성을 코드로 관리합니다.",
+        "==PostgreSQL==, ==MySQL== 등 RDBMS를 설계하며, ==Flyway==를 통해 데이터베이스 형상 관리를 자동화합니다.",
+        "==Firebase==, ==AWS== 환경에서 서비스를 배포하고 운영한 경험이 있습니다.",
       ],
     },
     {
       title: "Tooling",
-      items: ["Git", "GitHub", "GitHub Actions", "Fastlane", "Notion", "Figma"],
+      items: [
+        "==Git==과 ==GitHub Actions==, ==Fastlane==을 활용해 자동화된 ==CI/CD== 파이프라인을 구축합니다.",
+        "==Figma==, ==Notion== 등 협업 툴을 활용하여 팀 내 의사소통 효율을 높입니다.",
+      ],
     },
   ],
   experience: [
