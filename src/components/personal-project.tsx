@@ -1,70 +1,70 @@
 import { useResumeData } from "../context/resume-context";
-import { LinkList } from "./link-list";
-import { List } from "./List";
-import { RichTextLine } from "./rich-text-line";
-import { Section } from "./Section";
-import { SpecSheet } from "./spec-sheet";
 import { TwoColumnWrapper } from "./two-column-wrapper";
+import { formatDateRange } from "../utils/calculate-duration";
+import { LinkList } from "./link-list";
+import { SpecSheet } from "./spec-sheet";
+import { parseBold } from "../utils/parse-bold";
+
+const SubTitle = ({ title }: { title: string }) => (
+  <div className="text-[10px] font-bold text-[color:var(--color-text-subtle)] uppercase tracking-wider mb-1">
+    {title}
+  </div>
+);
 
 export const PersonalProject = () => {
-  const { personalProjects } = useResumeData();
+  const { personalProjects: project = [] } = useResumeData();
 
   return (
-    <Section title="Side Project" mt={48} id="side-project">
-      <div className="flex flex-col gap-16">
-        {personalProjects.map((project) => (
+    <section id="project" className="mt-16">
+      <h1 className="text-2xl font-bold mb-8 border-b-2 border-[color:var(--color-border)] pb-2 uppercase tracking-tighter">
+        Personal Projects
+      </h1>
+      <div className="flex flex-col gap-12">
+        {project.map((p, idx) => (
           <TwoColumnWrapper
-            key={project.title}
+            key={`${p.title}-${idx}`}
             left={
-              <>
-                <h3 className="text-xl font-bold mb-2 text-[color:var(--color-text)] whitespace-pre-line leading-tight">
-                  {project.title}
-                </h3>
+              <div className="flex flex-col gap-1">
+                <h2 className="text-xl font-bold text-[color:var(--color-text)] whitespace-pre-line leading-tight border-none p-0 m-0">
+                  {p.title}
+                </h2>
+                
+                {p.features[0]?.title && (
+                  <p className="text-[color:var(--color-text-muted)] text-[12px] leading-snug m-0 mt-1 italic">
+                    {p.features[0].title}
+                  </p>
+                )}
 
-                <div className="text-sm text-[color:var(--color-text-subtle)] mb-4">
-                  {project.from === project.to
-                    ? project.from
-                    : `${project.from} - ${project.to || "현재"}`}
+                <div className="text-[11px] text-[color:var(--color-text-subtle)] mt-2">
+                  {formatDateRange(p.from, p.to).dateRange}
                 </div>
-                <LinkList links={project.links || []} />
-              </>
+
+                {p.links && p.links.length > 0 && (
+                  <div className="mt-2">
+                    <LinkList links={p.links} />
+                  </div>
+                )}
+              </div>
             }
             right={
-              <div className="flex flex-col gap-10">
-                {project.features.map((feature, featureIndex) => (
-                  <div key={`${project.title}-${featureIndex}`}>
-                    <h2 className="text-lg font-bold mb-3 text-[color:var(--color-text)]">
-                      {feature.title}
-                    </h2>
-                    {feature.achievements.length > 0 && (
-                      <div className="mb-6">
-                        <h3 className="text-sm font-semibold mb-3 text-[color:var(--color-text)]">성과</h3>
-                        <List
-                          items={feature.achievements.map(
-                            (description: string, index: number) => (
-                              <RichTextLine key={index} text={description} />
-                            )
-                          )}
-                        />
-                      </div>
-                    )}
-                    {feature.contributions.length > 0 && (
-                      <div className="mb-6">
-                        <h3 className="text-sm font-semibold mb-3 text-[color:var(--color-text)]">
-                          주요 기여
-                        </h3>
-                        <List
-                          items={feature.contributions.map(
-                            (description: string, index: number) => (
-                              <RichTextLine key={index} text={description} />
-                            )
-                          )}
-                        />
-                      </div>
-                    )}
+              <div className="flex flex-col gap-8">
+                {p.features.map((feature, fIdx) => (
+                  <div key={fIdx} className="space-y-3">
+                    <h3 className="text-base font-bold text-[color:var(--color-text)] m-0 leading-snug">
+                      Project Experience
+                    </h3>
+                    
+                    <ul style={{ margin: 0, paddingLeft: "1.2rem", listStyleType: "disc", color: "var(--color-text)" }}>
+                      {[...feature.achievements, ...feature.contributions].map((item, iIdx) => (
+                        <li key={iIdx} style={{ fontSize: "13px" }}>
+                          {parseBold(item)}
+                        </li>
+                      ))}
+                    </ul>
+
                     {feature.spec && feature.spec.length > 0 && (
-                      <div>
-                        <h3 className="text-sm font-semibold mb-3 text-[color:var(--color-text)]"></h3>
+                      <div className="mt-2 pt-2 border-t border-[color:var(--color-border)]">
+                        <SubTitle title="Tech Stack" />
                         <SpecSheet items={feature.spec} />
                       </div>
                     )}
@@ -75,6 +75,6 @@ export const PersonalProject = () => {
           />
         ))}
       </div>
-    </Section>
+    </section>
   );
 };

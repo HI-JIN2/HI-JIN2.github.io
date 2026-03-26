@@ -1,107 +1,66 @@
-import React from "react";
-import { List } from "./List";
-import { Section } from "./Section";
-import { SpecSheet } from "./spec-sheet";
-import { TwoColumnWrapper } from "./two-column-wrapper";
-
 import { useResumeData } from "../context/resume-context";
+import { TwoColumnWrapper } from "./two-column-wrapper";
 import { formatDateRange } from "../utils/calculate-duration";
 import { parseBold } from "../utils/parse-bold";
-
-const renderParsedItems = (items: string[]): React.ReactNode[] =>
-  items.map((item, index) => (
-    <React.Fragment key={index}>{parseBold(item)}</React.Fragment>
-  ));
 
 export const WorkExperience = () => {
   const { experience } = useResumeData();
 
   return (
-    <Section title="Work Experience" mt={48} id="work-experience">
-      <div className="flex flex-col gap-16">
-        {experience.map(
-          ({ corp, from, to, features, position, about = [] }, index) => (
+    <section id="work" className="mt-16">
+      <h1 className="text-2xl font-bold mb-8 border-b-2 border-[color:var(--color-border)] pb-2 uppercase tracking-tighter">
+        Work Experience
+      </h1>
+      <div className="flex flex-col gap-12">
+        {experience.map((exp, idx) => {
+          const { corp, position, from, to, about = [], features = [] } = exp;
+          return (
             <TwoColumnWrapper
-              key={index}
+              key={`${corp}-${idx}`}
               left={
-                <>
-                  <h3 className="text-xl font-bold mb-2 text-[color:var(--color-text)] whitespace-pre-line leading-tight">
+                <div className="flex flex-col gap-1">
+                  <h2 className="text-xl font-bold text-[color:var(--color-text)] leading-tight m-0 border-none p-0">
                     {corp}
-                  </h3>
+                  </h2>
 
                   {about.length > 0 && (
-                    <ul className="text-[color:var(--color-text-subtle)] text-sm mb-3 space-y-1">
+                    <div className="text-[color:var(--color-text-muted)] text-[12px] leading-snug mt-1">
                       {about.map((item, index) => (
-                        <li key={index}>{item}</li>
+                        <p key={index} className="m-0 italic">{item}</p>
                       ))}
-                    </ul>
+                    </div>
                   )}
-                  <div className="space-y-1">
-                    <div className="text-[color:var(--color-text)] font-medium">{position}</div>
-                    <div className="text-sm text-[color:var(--color-text-subtle)]">
+
+                  <div className="space-y-0 mt-3">
+                    <div className="text-[color:var(--color-text)] font-semibold text-sm">{position}</div>
+                    <div className="text-[11px] text-[color:var(--color-text-subtle)]">
                       {formatDateRange(from, to).dateRange}
                     </div>
                   </div>
-                </>
+                </div>
               }
               right={
-                <div className="flex flex-col gap-10">
-                  {features.map((feature, featureIndex) => {
-                    return (
-                      <div key={featureIndex} className={featureIndex > 0 ? "pt-10 border-t border-[color:var(--color-border)]" : ""}>
-                        <h2 className="text-lg font-bold mb-3 text-[color:var(--color-text)]">
-                          {feature.title}
-                        </h2>
-                        <div className="text-sm text-[color:var(--color-text-subtle)] mb-6 space-y-1">
-                          {(() => {
-                            const { dateRange, duration } = formatDateRange(feature.from, feature.to);
-                            return (
-                              <p>
-                                {dateRange} (
-                                {duration}
-                                {"with" in feature &&
-                                  feature.with &&
-                                  ` · FE ${feature.with.fe}인, BE ${feature.with.be}인`}
-                                )
-                              </p>
-                            );
-                          })()}
-                          {feature.description && (
-                            <p className="text-[color:var(--color-text-muted)]">{feature.description}</p>
-                          )}
-                        </div>
-
-                        {feature.achievements.length > 0 && (
-                          <div className="mb-6">
-                            <h3 className="text-sm font-semibold mb-3 text-[color:var(--color-text)]">성과</h3>
-                            <List
-                              items={renderParsedItems(feature.achievements)}
-                            />
-                          </div>
-                        )}
-                        {feature.contributions.length > 0 && (
-                          <div className="mb-6">
-                            <h3 className="text-sm font-semibold mb-3 text-[color:var(--color-text)]">주요 기여</h3>
-                            <List
-                              items={renderParsedItems(feature.contributions)}
-                            />
-                          </div>
-                        )}
-                        {feature.spec.length > 0 && (
-                          <div>
-                            <h3 className="text-sm font-semibold mb-3 text-[color:var(--color-text)]"></h3>
-                            <SpecSheet items={feature.spec} />
-                          </div>
-                        )}
-                      </div>
-                    );
-                  })}
+                <div className="flex flex-col gap-8">
+                  {features.map((feature, fIdx) => (
+                    <div key={fIdx} className="space-y-2">
+                      <h3 className="text-base font-bold text-[color:var(--color-text)] m-0 leading-snug">
+                        {feature.title}
+                      </h3>
+                      <ul style={{ margin: 0, paddingLeft: "1.2rem", listStyleType: "disc", color: "var(--color-text)" }}>
+                        {[...feature.achievements, ...feature.contributions].map((item, iIdx) => (
+                          <li key={iIdx} style={{ fontSize: "13px" }}>
+                            {parseBold(item)}
+                          </li>
+                        ))}
+                      </ul>
+                    </div>
+                  ))}
                 </div>
               }
             />
-          )
-        )}
+          );
+        })}
       </div>
-    </Section>
+    </section>
   );
 };

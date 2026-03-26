@@ -1,9 +1,8 @@
 import { useResumeData } from "../context/resume-context";
 import { LinkList } from "./link-list";
-import { List } from "./List";
-import { RichTextLine } from "./rich-text-line";
 import { Section } from "./Section";
 import { TwoColumnWrapper } from "./two-column-wrapper";
+import { parseBold } from "../utils/parse-bold";
 
 type Props = {
   title?: string;
@@ -21,7 +20,7 @@ export const OpenSourceProject = ({ title, sectionTitle }: Props = {}) => {
     return null;
   }
 
-  const getSectionId = (title: string): string => {
+  const getSectionId = (t: string): string => {
     const idMap: Record<string, string> = {
       "Awards": "award",
       "Activities": "experience",
@@ -30,55 +29,54 @@ export const OpenSourceProject = ({ title, sectionTitle }: Props = {}) => {
       "Education": "education",
       "Certificates": "certificates",
     };
-    return idMap[title] || title.toLowerCase().replace(/\s+/g, "-");
+    return idMap[t] || t.toLowerCase().replace(/\s+/g, "-");
   };
 
   return (
     <>
       {projectsToRender.map((project) => {
         const sectionId = getSectionId(project.title);
-        const hasName = project.name && project.name.trim() !== "";
         const hasLinks = project.links && project.links.length > 0;
-        const useTwoColumn = hasName || hasLinks;
-
-        const featureBlocks = (
-          <div className="flex flex-col gap-10">
-            {project.features.map((feature, featureIndex) => (
-              <div key={`${project.title}-${featureIndex}`}>
-                <h2 className="text-lg font-bold mb-3 text-[color:var(--color-text)]">
-                  {feature.title}
-                </h2>
-                <List
-                  items={feature.descriptions.map((description, index) => {
-                    const href = feature.links && feature.links[index];
-                    return <RichTextLine key={index} text={description} href={href} />;
-                  })}
-                />
-              </div>
-            ))}
-          </div>
-        );
 
         return (
-          <Section key={project.title} title={sectionTitle || project.title} mt={48} id={sectionId}>
-            <div className="flex flex-col gap-16">
-              {useTwoColumn ? (
+          <Section key={project.title} title={sectionTitle || project.title} mt={64} id={sectionId}>
+            {/* Each feature becomes its own 2-column row */}
+            <div style={{ display: "flex", flexDirection: "column", gap: "2rem" }}>
+              {project.features.map((feature, featureIndex) => (
                 <TwoColumnWrapper
+                  key={featureIndex}
                   left={
-                    <>
-                      {hasName && (
-                        <h3 className="text-xl font-bold mb-2 text-[color:var(--color-text)] whitespace-pre-line leading-tight">
-                          {project.name}
-                        </h3>
+                    <div style={{ display: "flex", flexDirection: "column", gap: "0.25rem" }}>
+                      <p style={{ fontSize: "13px", fontWeight: 600, color: "var(--color-text)", margin: 0, lineHeight: 1.4 }}>
+                        {feature.title}
+                      </p>
+                      {featureIndex === 0 && hasLinks && (
+                        <div style={{ marginTop: "0.5rem" }}>
+                          <LinkList links={project.links || []} />
+                        </div>
                       )}
-                      {hasLinks && <LinkList links={project.links || []} />}
-                    </>
+                    </div>
                   }
-                  right={featureBlocks}
+                  right={
+                    <ul style={{ margin: 0, padding: "0 0 0 1.2rem", listStyleType: "disc", display: "flex", flexDirection: "column", gap: "0.25rem" }}>
+                      {feature.descriptions.map((description, index) => {
+                        const href = feature.links && feature.links[index];
+                        return (
+                          <li key={index} style={{ fontSize: "13px", color: "var(--color-text)", lineHeight: 1.5 }}>
+                            {href ? (
+                              <a href={href} target="_blank" rel="noopener noreferrer" style={{ color: "var(--color-link)" }}>
+                                {parseBold(description)}
+                              </a>
+                            ) : (
+                              parseBold(description)
+                            )}
+                          </li>
+                        );
+                      })}
+                    </ul>
+                  }
                 />
-              ) : (
-                featureBlocks
-              )}
+              ))}
             </div>
           </Section>
         );
