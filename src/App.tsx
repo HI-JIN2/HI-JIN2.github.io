@@ -33,6 +33,10 @@ function RedirectHandler() {
     const allowedPaths = ["/android", "/sw", "/general"];
     const currentPath = location.pathname;
     
+    if (currentPath === "/") {
+      return;
+    }
+
     if (!allowedPaths.includes(currentPath)) {
       // GitHub Pages 서브경로 대응 (예: /about/sw -> /sw)
       const matched = allowedPaths.find(p => currentPath.endsWith(p));
