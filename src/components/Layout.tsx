@@ -84,8 +84,8 @@ export const Layout = ({ children }: Props) => {
             {/* Mobile TOC Trigger */}
             <button
               onClick={() => setIsTOCOpen(true)}
-              className="lg:hidden p-2 hover:bg-[color:var(--ui-secondary-hover-bg)] rounded-md transition-colors"
-              style={{ color: "var(--color-text)" }}
+              className="lg:hidden p-2 hover:bg-[color:var(--ui-secondary-hover-bg)] rounded-md transition-colors flex items-center justify-center"
+              style={{ color: "var(--color-text)", display: "var(--display-mobile-only)" }}
               aria-label="Open menu"
             >
               <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">

@@ -145,7 +145,7 @@ export const TableOfContents = () => {
           onClick={() => setIsTOCOpen(false)}
         >
           <div 
-            className="absolute bottom-0 left-0 right-0 bg-[color:var(--color-bg)] rounded-t-3xl p-8 pb-12 shadow-2xl animate-in slide-in-from-bottom"
+            className="absolute bottom-0 left-1/2 -translate-x-1/2 w-full max-w-[500px] bg-[color:var(--color-bg)] rounded-t-3xl p-8 pb-12 shadow-2xl animate-in slide-in-from-bottom"
             onClick={(e) => e.stopPropagation()}
           >
             <div className="w-12 h-1.5 bg-[color:var(--color-border)] rounded-full mx-auto mb-8"></div>

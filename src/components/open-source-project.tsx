@@ -63,7 +63,7 @@ export const OpenSourceProject = ({ title, sectionTitle }: Props = {}) => {
                             {activityName}
                           </h3>
                           {(role || date) && (
-                            <p style={{ fontSize: "11px", color: "var(--color-text-subtle)", margin: 0, lineHeight: 1.3 }}>
+                            <p style={{ fontSize: "13px", color: "var(--color-text-subtle)", margin: 0, lineHeight: 1.3 }}>
                               {role} {date}
                             </p>
                           )}
