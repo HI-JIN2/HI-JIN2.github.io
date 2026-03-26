@@ -22,8 +22,6 @@ export const AboutMe = () => {
             </h3>
             <ul
               style={{
-                margin: 0,
-                padding: "0 0 0 1.2rem",
                 listStyleType: "disc",
               }}
             >
