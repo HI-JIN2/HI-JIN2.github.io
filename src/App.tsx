@@ -1,14 +1,16 @@
 import { useEffect } from "react";
 import { BrowserRouter, Routes, Route, useNavigate, useLocation } from "react-router-dom";
-import { AboutMe } from "./components/about-me";
-import { LastUpdatedAt } from "./components/last-updated-at";
-import { Layout } from "./components/Layout";
-import { OpenSourceProject } from "./components/open-source-project";
-import { SimpleList } from "./components/simple-list";
-import { PersonalProject } from "./components/personal-project";
+import {
+  AboutMe,
+  LastUpdatedAt,
+  OpenSourceProject,
+  SimpleList,
+  PersonalProject,
+  Skills,
+  WorkExperience,
+} from "./components/ResumeSections";
 import { Profile } from "./components/Profile";
-import { Skills } from "./components/skills";
-import { WorkExperience } from "./components/work-experience";
+import { Layout } from "./components/Layout";
 import { ResumeProvider } from "./context/resume-context";
 
 function RedirectHandler() {

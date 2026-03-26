@@ -7,7 +7,7 @@ type Section = {
 };
 
 export const TableOfContents = () => {
-  const { data, isTOCOpen, setIsTOCOpen } = useResume();
+  const { data } = useResume();
   const { skills } = data;
   const [activeId, setActiveId] = useState<string>("");
   const [isScrolling, setIsScrolling] = useState(false);
@@ -82,7 +82,6 @@ export const TableOfContents = () => {
     if (element) {
       setActiveId(id);
       setIsScrolling(true);
-      setIsTOCOpen(false); // Close drawer on click
 
       const yOffset = -100;
       const y = element.getBoundingClientRect().top + window.pageYOffset + yOffset;
@@ -142,45 +141,6 @@ export const TableOfContents = () => {
       </aside>
 
 
-      {/* Mobile Drawer Overlay */}
-      {isTOCOpen && (
-        <div 
-          className="lg:hidden fixed inset-0 bg-black/40 backdrop-blur-sm z-[300] transition-opacity animate-in fade-in flex justify-center items-end"
-          onClick={() => setIsTOCOpen(false)}
-        >
-          <div 
-            className="relative w-full max-w-[500px] bg-[color:var(--color-bg)] rounded-t-3xl p-6 pb-10 shadow-2xl animate-in slide-in-from-bottom"
-            onClick={(e) => e.stopPropagation()}
-          >
-            <div className="w-12 h-1.5 bg-[color:var(--color-border)] rounded-full mx-auto mb-8"></div>
-            <div className="flex justify-between items-center mb-8">
-              <h2 className="text-xl font-bold">Contents</h2>
-              <button onClick={() => setIsTOCOpen(false)} className="text-[color:var(--color-text-subtle)]">
-                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
-                  <line x1="18" y1="6" x2="6" y2="18"></line>
-                  <line x1="6" y1="6" x2="18" y2="18"></line>
-                </svg>
-              </button>
-            </div>
-            <ul className="grid grid-cols-1 gap-3 m-0 p-0 list-none">
-              {sections.map(({ id, title }) => (
-                <li key={id} className="m-0 p-0">
-                  <button
-                    onClick={() => handleClick(id)}
-                    className={`w-full text-left py-4 px-6 rounded-2xl text-base font-medium transition-colors ${
-                      activeId === id
-                        ? "bg-[color:var(--color-accent)] text-white"
-                        : "bg-[color:var(--color-bg-subtle)] text-[color:var(--color-text)] active:bg-[color:var(--color-border-subtle)]"
-                    }`}
-                  >
-                    {title}
-                  </button>
-                </li>
-              ))}
-            </ul>
-          </div>
-        </div>
-      )}
     </>
   );
 };
