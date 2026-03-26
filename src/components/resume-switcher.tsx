@@ -5,8 +5,15 @@ export const ResumeSwitcher = () => {
   const isAndroid = type === "android";
 
   return (
-    <nav className="flex items-center gap-4">
-      <div className="flex bg-[color:var(--ui-secondary-bg)] p-1 rounded-md border border-[color:var(--color-border)]">
+    <nav style={{ display: "flex", flexDirection: "row", alignItems: "center", gap: "1rem" }}>
+      <div style={{ 
+        display: "flex", 
+        backgroundColor: "var(--color-bg)", 
+        padding: "4px", 
+        borderRadius: "6px", 
+        border: "1px solid var(--color-border)",
+        boxShadow: "0 1px 2px rgba(0,0,0,0.05)"
+      }}>
         <button
           onClick={() => setType("android")}
           className={`px-3 py-1 text-xs font-medium rounded transition-all ${
