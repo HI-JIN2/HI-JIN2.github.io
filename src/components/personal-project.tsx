@@ -25,7 +25,7 @@ export const PersonalProject = () => {
             key={`${p.title}-${idx}`}
             left={
               <div className="flex flex-col gap-1">
-                <h2 className="text-xl font-bold text-[color:var(--color-text)] whitespace-pre-line leading-tight border-none p-0 m-0">
+                <h2 style={{ fontSize: "1.25rem", fontWeight: 700, color: "var(--color-text)", margin: 0, padding: 0, lineHeight: 1.2 }}>
                   {p.title}
                 </h2>
                 
