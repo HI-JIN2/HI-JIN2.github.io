@@ -26,9 +26,12 @@ type ResumeContextValue = {
 const ResumeContext = createContext<ResumeContextValue | null>(null);
 
 const resolveInitialType = (pathname: string): ResumeType => {
-  // 경로에서 타입 확인
-  if (pathname === "/sw" || pathname === "/general") {
+  // 경로의 끝자리로 타입 확인 (GitHub Pages 서브경로 대응)
+  if (pathname.endsWith("/sw") || pathname.endsWith("/general")) {
     return "general";
+  }
+  if (pathname.endsWith("/android")) {
+    return "android";
   }
   // 기본값은 android
   return DEFAULT_RESUME_TYPE;

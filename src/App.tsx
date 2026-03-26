@@ -30,24 +30,6 @@ function RedirectHandler() {
       navigate({ pathname: '/sw', search: location.search, hash: location.hash }, { replace: true });
       return;
     }
-    
-    // 허용된 경로가 아니면 /android로 리다이렉트
-    const allowedPaths = ["/android", "/sw", "/general"];
-    const currentPath = location.pathname;
-    
-    if (currentPath === "/") {
-      return;
-    }
-
-    if (!allowedPaths.includes(currentPath)) {
-      // GitHub Pages 서브경로 대응 (예: /about/sw -> /sw)
-      const matched = allowedPaths.find(p => currentPath.endsWith(p));
-      if (matched) {
-         // If it ends with /sw but didn't match exactly, it might be /about/sw
-         return; 
-      }
-      navigate({ pathname: "/android", search: location.search, hash: location.hash }, { replace: true });
-    }
   }, [navigate, location]);
   
   return null;
