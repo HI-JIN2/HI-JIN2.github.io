@@ -46,9 +46,9 @@ export const WorkExperience = () => {
                       </h3>
                       <ul style={{ margin: 0, paddingLeft: "1.2rem", listStyleType: "disc", color: "var(--color-text)" }}>
                         {[...feature.achievements, ...feature.contributions].map((item, iIdx) => (
-                          <li key={iIdx} style={{ fontSize: "13px" }}>
-                            {parseBold(item)}
-                          </li>
+                        <li key={iIdx}>
+                          {parseBold(item)}
+                        </li>
                         ))}
                       </ul>
                     </div>

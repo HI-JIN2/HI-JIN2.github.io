@@ -47,9 +47,9 @@ export const OpenSourceProject = ({ title, sectionTitle }: Props = {}) => {
                   key={featureIndex}
                   left={
                     <div style={{ display: "flex", flexDirection: "column", gap: "0.25rem" }}>
-                      <p style={{ fontSize: "13px", fontWeight: 600, color: "var(--color-text)", margin: 0, lineHeight: 1.4 }}>
+                      <h3 style={{ fontSize: "1rem", fontWeight: 700, color: "var(--color-text)", margin: 0, lineHeight: 1.2 }}>
                         {feature.title}
-                      </p>
+                      </h3>
                       {featureIndex === 0 && hasLinks && (
                         <div style={{ marginTop: "0.5rem" }}>
                           <LinkList links={project.links || []} />
@@ -62,7 +62,7 @@ export const OpenSourceProject = ({ title, sectionTitle }: Props = {}) => {
                       {feature.descriptions.map((description, index) => {
                         const href = feature.links && feature.links[index];
                         return (
-                          <li key={index} style={{ fontSize: "13px", color: "var(--color-text)", lineHeight: 1.5 }}>
+                          <li key={index} style={{ color: "var(--color-text)" }}>
                             {href ? (
                               <a href={href} target="_blank" rel="noopener noreferrer" style={{ color: "var(--color-link)" }}>
                                 {parseBold(description)}

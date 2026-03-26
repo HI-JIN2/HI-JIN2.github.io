@@ -6,9 +6,9 @@ import { SpecSheet } from "./spec-sheet";
 import { parseBold } from "../utils/parse-bold";
 
 const SubTitle = ({ title }: { title: string }) => (
-  <div className="text-[10px] font-bold text-[color:var(--color-text-subtle)] uppercase tracking-wider mb-1">
+  <h3 style={{ fontSize: "0.85rem", fontWeight: 700, color: "var(--color-text-subtle)", textTransform: "uppercase", letterSpacing: "0.05em", marginTop: "1rem", marginBottom: "0.5rem" }}>
     {title}
-  </div>
+  </h3>
 );
 
 import { Section } from "./Section";
@@ -55,7 +55,7 @@ export const PersonalProject = () => {
                     
                     <ul style={{ margin: 0, paddingLeft: "1.2rem", listStyleType: "disc", color: "var(--color-text)" }}>
                       {[...feature.achievements, ...feature.contributions].map((item, iIdx) => (
-                        <li key={iIdx} style={{ fontSize: "13px" }}>
+                        <li key={iIdx}>
                           {parseBold(item)}
                         </li>
                       ))}

@@ -30,7 +30,6 @@ export const AboutMe = () => {
               {descriptions.map((description, descIndex) => (
                 <li
                   key={descIndex}
-                  style={{ color: "var(--color-text-muted)", fontSize: "13px" }}
                 >
                   {parseBold(description)}
                 </li>

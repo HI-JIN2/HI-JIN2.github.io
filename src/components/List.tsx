@@ -5,11 +5,11 @@ type Props = {
 };
 export const List = ({ items }: Props) => {
   return (
-    <ul className="ml-6 space-y-2 list-disc">
+    <ul className="ml-6 list-disc">
       {items.map((item, index) => (
         <li
           key={index}
-          className="leading-relaxed break-keep text-[color:var(--color-text-muted)]"
+          className="break-keep"
         >
           {item}
         </li>

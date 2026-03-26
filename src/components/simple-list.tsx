@@ -44,9 +44,9 @@ export const SimpleList = ({ title, sectionTitle, sectionId }: Props) => {
             <div key={`${listData.title}-${itemIndex}`}>
               {/* features[].title이 있으면 표시 */}
               {hasTitle && (
-                <h2 className="text-lg font-bold mb-3 text-[color:var(--color-text)]">
+                <h3 className="text-base font-bold mb-3 text-[color:var(--color-text)]">
                   {item.title}
-                </h2>
+                </h3>
               )}
               <List
                 items={item.descriptions.map((description, index) => {
