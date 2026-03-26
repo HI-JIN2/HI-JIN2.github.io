@@ -1,5 +1,5 @@
 import { useEffect, useMemo, useRef, useState } from "react";
-import { useResumeData } from "../context/resume-context";
+import { useResume } from "../context/resume-context";
 
 type Section = {
   id: string;
@@ -7,10 +7,10 @@ type Section = {
 };
 
 export const TableOfContents = () => {
-  const { skills } = useResumeData();
+  const { data, isTOCOpen, setIsTOCOpen } = useResume();
+  const { skills } = data;
   const [activeId, setActiveId] = useState<string>("");
   const [isScrolling, setIsScrolling] = useState(false);
-  const [isOpen, setIsOpen] = useState(false); // Mobile drawer state
   const timeoutIdsRef = useRef<number[]>([]);
 
   useEffect(() => {
@@ -78,7 +78,7 @@ export const TableOfContents = () => {
     if (element) {
       setActiveId(id);
       setIsScrolling(true);
-      setIsOpen(false); // Close drawer on click
+      setIsTOCOpen(false); // Close drawer on click
 
       const yOffset = -100;
       const y = element.getBoundingClientRect().top + window.pageYOffset + yOffset;
@@ -137,44 +137,12 @@ export const TableOfContents = () => {
         </nav>
       </aside>
 
-      {/* Mobile Drawer Trigger (Floating Action Button) */}
-      <button
-        onClick={() => setIsOpen(true)}
-        className="lg:hidden"
-        style={{
-          position: "fixed",
-          top: "5.5rem",
-          right: "1.5rem",
-          width: "3.5rem",
-          height: "3.5rem",
-          backgroundColor: "var(--color-accent)",
-          color: "white",
-          borderRadius: "50%",
-          boxShadow: "0 10px 25px -5px rgba(0, 0, 0, 0.3), 0 8px 10px -6px rgba(0, 0, 0, 0.3)",
-          zIndex: 999,
-          display: "flex",
-          alignItems: "center",
-          justifyContent: "center",
-          border: "none",
-          cursor: "pointer",
-          transition: "transform 0.2s ease-in-out",
-        }}
-        onMouseEnter={e => e.currentTarget.style.transform = "scale(1.1)"}
-        onMouseLeave={e => e.currentTarget.style.transform = "scale(1)"}
-        aria-label="Open menu"
-      >
-        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
-          <line x1="3" y1="12" x2="21" y2="12"></line>
-          <line x1="3" y1="6" x2="21" y2="6"></line>
-          <line x1="3" y1="18" x2="21" y2="18"></line>
-        </svg>
-      </button>
 
       {/* Mobile Drawer Overlay */}
-      {isOpen && (
+      {isTOCOpen && (
         <div 
-          className="xl:hidden fixed inset-0 bg-black/40 backdrop-blur-sm z-[300] transition-opacity animate-in fade-in"
-          onClick={() => setIsOpen(false)}
+          className="lg:hidden fixed inset-0 bg-black/40 backdrop-blur-sm z-[300] transition-opacity animate-in fade-in"
+          onClick={() => setIsTOCOpen(false)}
         >
           <div 
             className="absolute bottom-0 left-0 right-0 bg-[color:var(--color-bg)] rounded-t-3xl p-8 pb-12 shadow-2xl animate-in slide-in-from-bottom"
@@ -183,7 +151,7 @@ export const TableOfContents = () => {
             <div className="w-12 h-1.5 bg-[color:var(--color-border)] rounded-full mx-auto mb-8"></div>
             <div className="flex justify-between items-center mb-8">
               <h2 className="text-xl font-bold">Contents</h2>
-              <button onClick={() => setIsOpen(false)} className="text-[color:var(--color-text-subtle)]">
+              <button onClick={() => setIsTOCOpen(false)} className="text-[color:var(--color-text-subtle)]">
                 <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
                   <line x1="18" y1="6" x2="6" y2="18"></line>
                   <line x1="6" y1="6" x2="18" y2="18"></line>

@@ -17,7 +17,7 @@ export const WorkExperience = () => {
               key={`${corp}-${idx}`}
               left={
                 <div className="flex flex-col gap-1">
-                  <h2 style={{ fontSize: "1.25rem", fontWeight: 700, color: "var(--color-text)", margin: 0, padding: 0, lineHeight: 1.2 }}>
+                  <h2 style={{ fontSize: "1.25rem", fontWeight: 700, color: "var(--color-text)", marginTop: "2rem", marginBottom: "1rem", padding: 0, lineHeight: 1.2 }}>
                     {corp}
                   </h2>
 
@@ -41,7 +41,7 @@ export const WorkExperience = () => {
                 <div className="flex flex-col gap-8">
                   {features.map((feature, fIdx) => (
                     <div key={fIdx} className="space-y-2">
-                      <h3 className="text-base font-bold text-[color:var(--color-text)] m-0 leading-snug">
+                      <h3 style={{ fontSize: "1rem", fontWeight: 700, color: "var(--color-text)", marginTop: "2rem", marginBottom: "1rem", lineHeight: 1.2 }}>
                         {feature.title}
                       </h3>
                       <ul style={{ margin: 0, paddingLeft: "1.2rem", listStyleType: "disc", color: "var(--color-text)" }}>

@@ -17,8 +17,10 @@ type ResumeContextValue = {
   type: ResumeType;
   data: ResumeContent;
   theme: "light" | "dark";
+  isTOCOpen: boolean;
   setType: (type: ResumeType) => void;
   toggleTheme: () => void;
+  setIsTOCOpen: (open: boolean) => void;
 };
 
 const ResumeContext = createContext<ResumeContextValue | null>(null);
@@ -69,12 +71,14 @@ export const ResumeProvider = ({ children }: { children: React.ReactNode }) => {
     localStorage.setItem("theme", theme);
   }, [theme]);
 
+  const [isTOCOpen, setIsTOCOpen] = useState(false);
+
   const toggleTheme = () => {
     setTheme(prev => prev === "light" ? "dark" : "light");
   };
 
   return (
-    <ResumeContext.Provider value={{ type, data, theme, setType: handleSetType, toggleTheme }}>
+    <ResumeContext.Provider value={{ type, data, theme, setType: handleSetType, toggleTheme, isTOCOpen, setIsTOCOpen }}>
       {children}
     </ResumeContext.Provider>
   );

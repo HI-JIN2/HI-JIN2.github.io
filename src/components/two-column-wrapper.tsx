@@ -8,16 +8,15 @@ type Props = {
 export const TwoColumnWrapper = ({ left, right }: Props) => {
   return (
     <div
+      className="two-column-grid"
       style={{
-        display: "grid",
-        gridTemplateColumns: "250px 1fr", // 너비를 200px에서 250px로 확장
         columnGap: "2rem",
         rowGap: "1.5rem",
         marginBottom: "4rem",
-        alignItems: "start", // 시작점 정렬 보장
+        alignItems: "start",
       }}
     >
-      <div style={{ flexShrink: 0, paddingTop: "0.25rem" }}>{left}</div>
+      <div style={{ flexShrink: 0 }}>{left}</div>
       <div
         style={{
           minWidth: 0,

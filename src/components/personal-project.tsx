@@ -17,14 +17,14 @@ export const PersonalProject = () => {
   const { personalProjects: project = [] } = useResumeData();
 
   return (
-    <Section title="Personal Projects" id="project" mt={64}>
+    <Section title="Projects" id="project" mt={64}>
       <div className="flex flex-col gap-12">
         {project.map((p, idx) => (
           <TwoColumnWrapper
             key={`${p.title}-${idx}`}
             left={
               <div className="flex flex-col gap-1">
-                <h2 style={{ fontSize: "1.25rem", fontWeight: 700, color: "var(--color-text)", margin: 0, padding: 0, lineHeight: 1.2 }}>
+                <h2 style={{ fontSize: "1.25rem", fontWeight: 700, color: "var(--color-text)", marginTop: "2rem", marginBottom: "1rem", padding: 0, lineHeight: 1.2 }}>
                   {p.title}
                 </h2>
                 
@@ -49,7 +49,7 @@ export const PersonalProject = () => {
               <div className="flex flex-col gap-8">
                 {p.features.map((feature, fIdx) => (
                   <div key={fIdx} className="space-y-3">
-                    <h3 className="text-base font-bold text-[color:var(--color-text)] m-0 leading-snug">
+                    <h3 style={{ fontSize: "1rem", fontWeight: 700, color: "var(--color-text)", marginTop: "2rem", marginBottom: "1rem", lineHeight: 1.2 }}>
                       Project Experience
                     </h3>
                     
