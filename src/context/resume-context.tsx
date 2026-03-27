@@ -25,7 +25,18 @@ type ResumeContextValue = {
 
 const ResumeContext = createContext<ResumeContextValue | null>(null);
 
-const resolveInitialType = (pathname: string): ResumeType => {
+const resolveInitialType = (pathname: string, search: string): ResumeType => {
+  // query param convention: ?General=true selects general
+  try {
+    const params = new URLSearchParams(search);
+    const general = params.get("General");
+    if (general && general.toLowerCase() === "true") {
+      return "general";
+    }
+  } catch (e) {
+    // ignore
+  }
+
   // 경로의 끝자리로 타입 확인 (GitHub Pages 서브경로 대응)
   if (pathname.endsWith("/sw") || pathname.endsWith("/general")) {
     return "general";
@@ -39,19 +50,19 @@ const resolveInitialType = (pathname: string): ResumeType => {
 
 export const ResumeProvider = ({ children }: { children: React.ReactNode }) => {
   const navigate = useNavigate();
-  const { pathname } = useLocation();
+  const { pathname, search } = useLocation();
   const [type, setType] = useState<ResumeType>(() =>
-    resolveInitialType(pathname)
+    resolveInitialType(pathname, search)
   );
   const data = useMemo(() => getResumeContent(type), [type]);
 
   // 경로 변경 시 타입 업데이트
   useEffect(() => {
-    const newType = resolveInitialType(pathname);
+    const newType = resolveInitialType(pathname, search);
     if (newType !== type) {
       setType(newType);
     }
-  }, [pathname, type]);
+  }, [pathname, search, type]);
 
   // 타입 변경 시 경로 업데이트
   const handleSetType = (newType: ResumeType) => {

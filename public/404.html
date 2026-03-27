@@ -1,36 +1,30 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <meta charset="utf-8">
+    <meta charset="utf-8" />
     <title>Redirecting...</title>
     <script>
-      // GitHub Pages에서 SPA 라우팅을 지원하기 위한 404 페이지
-      // 경로를 쿼리 파라미터로 변환하여 index.html로 리다이렉트
-      var path = window.location.pathname;
-      var search = window.location.search;
-      var hash = window.location.hash;
+      // GitHub Pages SPA deep-link fallback.
+      // Unknown paths (e.g. /sw) are served as /404.html; we persist the
+      // intended URL and load /index.html once, then restore the URL.
+      (function () {
+        var redirect = window.location.pathname + window.location.search + window.location.hash;
 
-      // /general -> /?General=true로 변환
-      // (그 외 경로는 쿼리 파라미터만 유지하고 index.html로 리다이렉트)
-      var normalizedPath = path.replace(/^\/+/, "").replace(/\/+$/, "");
+        try {
+          // Avoid poisoning the redirect key if someone visits /404.html directly.
+          if (redirect && redirect !== "/404.html") {
+            sessionStorage.setItem("spa-redirect", redirect);
+          }
+        } catch (e) {
+          // ignore
+        }
 
-      var redirectPath = "/index.html";
-
-      if (normalizedPath === "general") {
-        var params = new URLSearchParams(search);
-        params.set("General", "true");
-        redirectPath += "?" + params.toString();
-      } else if (search) {
-        redirectPath += search;
-      }
-      
-      if (hash) {
-        redirectPath += hash;
-      }
-      
-      window.location.replace(redirectPath);
+        window.location.replace("/index.html");
+      })();
     </script>
-    <meta http-equiv="refresh" content="1; url=/index.html">
+    <noscript>
+      <meta http-equiv="refresh" content="0; url=/index.html" />
+    </noscript>
   </head>
   <body>
     <p>Redirecting...</p>
