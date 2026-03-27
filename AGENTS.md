@@ -82,6 +82,12 @@ npx vitest run -t "some test name"
 
 ## Code Style (Project Conventions)
 
+## Commit Message Convention
+
+- Format: `<type>: <Korean description>`
+- Examples: `fix: 00 고침`, `feat: 이력서 섹션 추가`, `style: 타이포 조정`
+- Keep the type in English (Conventional Commits style), and write the description in Korean.
+
 ### TypeScript
 
 - `strict: true` is enabled; avoid `any` and unsafe assertions.

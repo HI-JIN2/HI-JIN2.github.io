@@ -31,12 +31,16 @@ export const LinkList = ({ links }: Props) => {
           key={index}
           target="_blank"
           href={link.url}
-          className={isGitHubUrl(link.url) || link.title.toLowerCase() === "github" ? "inline-flex items-center" : "text-sm"}
+          className={
+            isGitHubUrl(link.url) || link.title.toLowerCase() === "github"
+              ? "inline-flex items-center text-[color:var(--color-text)] hover:text-[color:var(--color-text)] hover:no-underline"
+              : "text-sm"
+          }
           aria-label={isGitHubUrl(link.url) || link.title.toLowerCase() === "github" ? "GitHub" : undefined}
           title={isGitHubUrl(link.url) || link.title.toLowerCase() === "github" ? "GitHub" : undefined}
         >
           {isGitHubUrl(link.url) || link.title.toLowerCase() === "github" ? (
-            <GitHubMark size={16} title="" />
+            <GitHubMark size={18} title="" className="mx-0.5" />
           ) : (
             link.title
           )}

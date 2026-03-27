@@ -1,16 +1,6 @@
 import { useResumeData } from "../context/resume-context";
 import { Link } from "./link";
-import { GitHubMark } from "./icons/github-mark";
 import { Section } from "./Section";
-
-const isGitHubUrl = (href: string) => {
-  try {
-    const u = new URL(href);
-    return u.hostname.toLowerCase().endsWith("github.com");
-  } catch (e) {
-    return href.includes("github.com");
-  }
-};
 
 export const Profile = () => {
   const { profile } = useResumeData();
@@ -77,22 +67,7 @@ export const Profile = () => {
                   href={resolvedHref}
                   style={{ textDecoration: "none", fontSize: "13px" }}
                 >
-                  {label.toLowerCase() === "github" || isGitHubUrl(resolvedHref) ? (
-                    <span
-                      style={{
-                        display: "inline-flex",
-                        alignItems: "center",
-                        gap: "0.4rem",
-                        color: "var(--color-text)",
-                      }}
-                      aria-label="GitHub"
-                      title="GitHub"
-                    >
-                      <GitHubMark size={16} title="" />
-                    </span>
-                  ) : (
-                    value
-                  )}
+                  {value}
                 </Link>
               ) : (
                 <span style={{ fontSize: "13px", color: "var(--color-text)" }}>
