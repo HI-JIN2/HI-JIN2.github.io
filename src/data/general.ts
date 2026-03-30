@@ -198,6 +198,37 @@ export const GENERAL_RESUME: ResumeVariant = {
   ],
   personalProjects: [
     {
+      title: "Parkit (실시간 주차 코칭 시스템)",
+      from: "2026.03",
+      to: "",
+      features: [
+        {
+          title: "온프레미스 K8s 기반 MSA 아키텍처 구축 및 실시간 주차 코칭 시스템 개발",
+          spec: [
+            "Kubernetes",
+            "Kafka",
+            "Spring Boot",
+            "Kotlin",
+            "MongoDB",
+            "Reactive Redis",
+            "Nginx Ingress",
+            "ArgoCD",
+          ],
+          achievements: [
+            "위험 임계치 기반 ==5단계 주차 코칭 알고리즘== 설계로 복잡한 센서 데이터를 직관적인 가이드로 변환",
+            "==Nginx Ingress Rewrite== 설정 최적화 및 K8s 계층별 검증 프로세스 정립으로 인프라 트러블슈팅 효율 개선",
+            "PV/PVC 기반 스토리지 클래스 및 ==StatefulSet== 전략 수립으로 온프레미스 환경 데이터 가용성 확보",
+          ],
+          contributions: [
+            "==Kafka== 기반 비동기 이벤트 파이프라인을 구축해 서비스 간 결합도를 낮추고 시스템 확장성 확보",
+            "4방향 센서 데이터 통합 분석 및 ==우선순위 엔진== 개발을 통해 가장 시급한 코칭 정보 실시간 노출",
+            "Spring STOMP ==WebSocket== 기반 저지연 데이터 브로드캐스트를 구현해 서버 분석 결과 즉시 반영",
+            "DTO 리팩토링 및 Jackson 설정을 통한 ==ISO-8601 타임스탬프 표준화==로 서비스 간 데이터 정합성 확보",
+          ],
+        },
+      ],
+    },
+    {
       title: "EAT-SSU(잇슈)",
       from: "2022.11",
       to: "",
