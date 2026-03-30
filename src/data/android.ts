@@ -186,36 +186,6 @@ export const ANDROID_RESUME: ResumeVariant = {
   ],
   personalProjects: [
     {
-      title: "Parkit (실시간 주차 코칭 시스템)",
-      from: "2026.03",
-      to: "",
-      features: [
-        {
-          title: "온프레미스 K8s 기반 MSA 아키텍처 구축 및 실시간 주차 코칭 시스템 개발",
-          spec: [
-            "Kotlin",
-            "Compose",
-            "WebSocket (STOMP)",
-            "Kafka",
-            "Spring Boot",
-            "Kubernetes",
-            "Reactive Redis",
-          ],
-          achievements: [
-            "위험 임계치 기반 ==5단계 주차 코칭 알고리즘== 설계로 복잡한 센서 데이터를 직관적인 가이드로 변환",
-            "==실시간 반응성 확보==: 서버 분석 결과를 지연 없이 사용자 화면에 즉각적으로 반영하는 고성능 브로드캐스트 로직 완성",
-            "하드웨어 오차를 고려한 ==핸들 회전 임계값 및 스텝 전환 민감도 조정==으로 서비스 안정성 확보",
-          ],
-          contributions: [
-            "4방향 센서 데이터 통합 분석 및 ==우선순위 엔진== 개발을 통해 가장 시급한 코칭 정보 실시간 노출",
-            "Spring STOMP ==WebSocket== 기반 저지연 데이터 브로드캐스트를 구현해 실시간 코칭 피드백 제공",
-            "차량의 시작 구역 복귀나 비활성 상태를 감지하는 ==세션 자동 초기화 로직 (Restart Detection)== 구현",
-            "데이터를 ISO-8601 문자열 형식으로 표준화하여 서비스 간 ==타임스탬프 정합성== 확보 및 가독성 개선",
-          ],
-        },
-      ],
-    },
-    {
       title: "EAT-SSU(잇슈)",
       from: "2022.11",
       to: "",

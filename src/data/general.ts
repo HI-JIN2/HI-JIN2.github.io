@@ -198,6 +198,38 @@ export const GENERAL_RESUME: ResumeVariant = {
   ],
   personalProjects: [
     {
+      title: "공고zip",
+      from: "2026.03",
+      to: "",
+      features: [
+        {
+          title: "AI 기반 주택청약 공고 분석 및 지리 정보 보강 파이프라인 개발 (1인 개발)",
+          spec: [
+            "React",
+            "FastAPI",
+            "PostGIS",
+            "MongoDB",
+            "Docker",
+            "Terraform",
+            "Gemini API",
+            "Kakao API",
+            "OCI",
+          ],
+          achievements: [
+            "==Parser/Geo 멀티 에이전트== 아키텍처 설계로 문서 파싱과 공간 연산의 관심사 분리 및 기술적 확장성 확보",
+            "MD5 해시 기반 ==Stable ID 시스템== 구축으로 260건 이상의 데이터에 대한 중복 방지 및 정합성 보장",
+            "Terraform 기반 ==IaC== 환경 구축 및 1GB VM 한계 극복을 위한 Swap 메모리/자원 격리로 운영 안정성 확보",
+            "GitHub Actions를 활용해 인스턴스 확보를 자동 재시도하는 ==인프라 프로비저닝 자동화== 파이프라인 구축",
+          ],
+          contributions: [
+            "PostGIS 공간 쿼리를 활용해 인근 지하철역과의 도보 거리를 산출하는 ==지능형 지리 정보 보강== 로직 구현",
+            "프론트엔드 ==Batching & Throttling== 전송 제어로 대량 API 호출 시의 브라우저 부하 및 할당량 이슈 해결",
+            "Exception Barrier 및 FastAPI lifespan 비동기 초기화를 적용하여 시스템 ==회복력(Resilience)== 및 배포 안정성 강화",
+          ],
+        },
+      ],
+    },
+    {
       title: "Parkit (실시간 주차 코칭 시스템)",
       from: "2026.03",
       to: "",
