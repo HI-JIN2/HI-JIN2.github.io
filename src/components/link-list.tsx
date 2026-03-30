@@ -52,9 +52,9 @@ export const LinkList = ({ links }: Props) => {
             title={isGithub ? "GitHub" : isPlayStore ? "Play Store" : undefined}
           >
             {isGithub ? (
-              <GitHubMark size={18} title="" className="mx-0.5" />
+              <GitHubMark size={24} title="" className="mx-0.5" />
             ) : isPlayStore ? (
-              <PlayStore size={18} title="" className="mx-0.5" />
+              <PlayStore size={24} title="" className="mx-0.5" />
             ) : (
               link.title
             )}
