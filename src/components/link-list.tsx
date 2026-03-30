@@ -1,5 +1,6 @@
 import { Link } from "./link";
 import { GitHubMark } from "./icons/github-mark";
+import { PlayStore } from "./icons/play-store";
 
 const isGitHubUrl = (href: string) => {
   try {
@@ -8,6 +9,12 @@ const isGitHubUrl = (href: string) => {
   } catch (e) {
     return href.includes("github.com");
   }
+};
+
+const isPlayStoreUrl = (href: string, title: string) => {
+  const isUrl = href.includes("play.google.com");
+  const isTitle = title.toLowerCase().includes("play store") || title.toLowerCase().includes("플레이스토어");
+  return isUrl || isTitle;
 };
 
 type LinkItem = {
@@ -26,26 +33,34 @@ export const LinkList = ({ links }: Props) => {
 
   return (
     <div className="flex items-center gap-3 flex-wrap">
-      {links.map((link, index) => (
-        <Link
-          key={index}
-          target="_blank"
-          href={link.url}
-          className={
-            isGitHubUrl(link.url) || link.title.toLowerCase() === "github"
-              ? "inline-flex items-center text-[color:var(--color-text)] hover:text-[color:var(--color-text)] hover:no-underline"
-              : "text-sm"
-          }
-          aria-label={isGitHubUrl(link.url) || link.title.toLowerCase() === "github" ? "GitHub" : undefined}
-          title={isGitHubUrl(link.url) || link.title.toLowerCase() === "github" ? "GitHub" : undefined}
-        >
-          {isGitHubUrl(link.url) || link.title.toLowerCase() === "github" ? (
-            <GitHubMark size={18} title="" className="mx-0.5" />
-          ) : (
-            link.title
-          )}
-        </Link>
-      ))}
+      {links.map((link, index) => {
+        const isGithub = isGitHubUrl(link.url) || link.title.toLowerCase() === "github";
+        const isPlayStore = isPlayStoreUrl(link.url, link.title);
+        const isIconLink = isGithub || isPlayStore;
+
+        return (
+          <Link
+            key={index}
+            target="_blank"
+            href={link.url}
+            className={
+              isIconLink
+                ? "inline-flex items-center !text-black !hover:text-black"
+                : "text-sm"
+            }
+            aria-label={isGithub ? "GitHub" : isPlayStore ? "Play Store" : undefined}
+            title={isGithub ? "GitHub" : isPlayStore ? "Play Store" : undefined}
+          >
+            {isGithub ? (
+              <GitHubMark size={18} title="" className="mx-0.5" />
+            ) : isPlayStore ? (
+              <PlayStore size={18} title="" className="mx-0.5" />
+            ) : (
+              link.title
+            )}
+          </Link>
+        );
+      })}
     </div>
   );
 };

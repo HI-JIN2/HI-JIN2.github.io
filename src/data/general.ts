@@ -206,6 +206,10 @@ export const GENERAL_RESUME: ResumeVariant = {
           title: "GitHub",
           url: "https://github.com/EAT-SSU/Android",
         },
+        {
+          title: "Play Store",
+          url: "https://play.google.com/store/apps/details?id=com.eatssu.android&pli=1",
+        },
       ],
       features: [
         {
@@ -285,6 +289,10 @@ export const GENERAL_RESUME: ResumeVariant = {
         {
           title: "GitHub",
           url: "https://github.com/saegil-project/Saegil-Android",
+        },
+        {
+          title: "Play Store",
+          url: "https://play.google.com/store/apps/details?id=com.saegil.android",
         },
       ],
       features: [

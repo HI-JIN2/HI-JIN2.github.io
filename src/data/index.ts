@@ -111,13 +111,13 @@ const COMMON_ACTIVITIES: OpenSourceProject[] = [
         ],
       },
       {
-        title: "숭실대학교 창업지원단 Pre-startup, COGO (2024.08 - 2024.12)",
+        title: "COGO - 숭실대학교 창업지원단 Pre-startup (2024.08 - 2024.12)",
         descriptions: [
           "창업 아이디어 발굴 및 사업화 지원 프로그램 참여",
         ],
       },
       {
-        title: "아산나눔재단, 2024 아산 두어스 대학생 창업 부트캠프 1기 (2024.01)",
+        title: "아산 두어스 대학생 창업 부트캠프 1기 - 아산나눔재단 (2024.01)",
         descriptions: [
           "대학생 창업 역량 강화를 위한 부트캠프 참여",
         ],
@@ -130,14 +130,14 @@ const COMMON_ACTIVITIES: OpenSourceProject[] = [
         ],
       },
       {
-        title: "UMC 4th SSU Vice Lead & Spring Boot (2023.03 - 2023.08)",
+        title: "UMC 4th - SSU Vice Lead & Spring Boot (2023.03 - 2023.08)",
         descriptions: [
           "UMC 숭실대 부리더 및 숭실대 제1회 DEVCON 주최 및 운영(참여자 400명 규모)",
           "Spring Boot 스터디 참여 및 프로젝트 진행",
         ],
       },
       {
-        title: "UMC 3rd Android (2022.09 - 2023.02)",
+        title: "UMC 3rd - Android (2022.09 - 2023.02)",
         descriptions: [
           "안드로이드 개발 스터디 참여 및 프로젝트 진행",
         ],
