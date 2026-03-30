@@ -94,7 +94,7 @@ export type ResumeContent = ResumeVariant & {
   lastUpdatedAt: string;
 };
 
-const LAST_UPDATED_AT = "2026. 03. 26";
+const LAST_UPDATED_AT = "2026. 03. 30";
 
 
 // name이 있는 레이아웃 (Activities)
@@ -114,6 +114,7 @@ const COMMON_ACTIVITIES: OpenSourceProject[] = [
         title: "COGO - 숭실대학교 창업지원단 Pre-startup (2024.08 - 2024.12)",
         descriptions: [
           "창업 아이디어 발굴 및 사업화 지원 프로그램 참여",
+          "선후배 커피챗 매칭 플랫폼을 Flutter를 이용해 크로스플랫폼 모바일 앱 개발"
         ],
       },
       {
@@ -222,7 +223,7 @@ const COMMON_SIMPLE_LISTS: SimpleListDataType[] = [
         title: "",
         descriptions: [
           "숭실대학교 컴퓨터학부 학사 / ICT 유통물류 융합전공 (2021.03 - 2025.08)",
-          "대천여자고등학교 (2018.03 - 2021.01)",
+          "대천여자고등학교 자연계(2018.03 - 2021.01)",
         ],
       },
     ],
